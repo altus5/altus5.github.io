@@ -9,6 +9,7 @@ var fs = require('fs');
 var ejs = require('ejs');
 var marked = require('marked');
 var moment = require('moment-timezone');
+var crypto = require('crypto');
 var config = require('../conf');
 
 module.exports.archives = function(archiveName) {
@@ -200,6 +201,14 @@ function buildEjsRenderData(archiveData, file) {
     post: page,
     filename: file.path,
     asset_path: function(path) {
+      if (path.match(/(css|js)$/)) {
+        var md5hash = crypto.createHash('md5');
+        var src = __dirname + '/../../dist' + path;
+        var content = fs.readFileSync(src);
+        md5hash.update(content, 'binary');
+        var hashStr = md5hash.digest('hex');
+        path += '?rev='+hashStr;
+      }
       return path;
     },
     relatePosts: function(title, site) {

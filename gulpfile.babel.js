@@ -400,10 +400,11 @@ gulp.task('serve:dist', ['default'], () =>
 // Build production files, the default task
 gulp.task('default', ['clean'], cb =>
   runSequence(
+    ['lint', 'scripts', 'vendorjs', 'styles'],
     ['blog.archives'],
     ['blog.posts', 'blog.index', 'blog.tags', 'feed'],
-    ['styles', 'page.markdown', 'page.ejs', 'page.index'],
-    ['sitemap', 'lint', 'scripts', 'vendorjs', 'images', 'copy', 'plain.html'],
+    ['page.markdown', 'page.ejs', 'page.index'],
+    ['sitemap', 'images', 'copy', 'plain.html'],
     ['html', 'xml'],
     //'generate-service-worker',
     cb
