@@ -2,7 +2,7 @@ version: '2'
 
 services:
   wsk:
-    image: altus5/web-starter-kit:0.6.5_1
+    image: altus5/web-starter-kit:0.6.5_2
     container_name: wsk
     volumes:
       - .:/srv/web
