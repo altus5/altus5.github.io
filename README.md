@@ -1,77 +1,131 @@
-# [![Web Starter Kit](https://cloud.githubusercontent.com/assets/110953/11445049/f05512ba-9520-11e5-8fdb-8c8eb5f690d0.jpg)](https://github.com/google/web-starter-kit/releases/latest)
+ALTUS-FIVEサイトの構築キット
+===========================
 
-## Overview
+ALTUS-FIVEサイトは、GitHub Pages 用に gulp でサイトイメージを構築します。  
+uglify、sass、imagemin、lint などは、[Google Web Starter Kit](https://developers.google.com/web/tools/starter-kit/?hl=ja) をベースに、
+ブログ記事は、独自の gulp プラグインで生成しています。
 
-[Web Starter Kit](https://developers.google.com/web/tools/starter-kit/) is an opinionated boilerplate for web development. Tools for building a great experience across many devices and [performance oriented](#web-performance). Helping you to stay productive following the best practices outlined in Google's [Web Fundamentals](https://developers.google.com/web/fundamentals/). A solid starting point for both professionals and newcomers to the industry.
+## 初回起動時
 
-### Features
+vagrant up すると、 [Web Starter Kit の Dockerコンテナ](https://hub.docker.com/r/altus5/web-starter-kit/)が起動して、
+gulp が実行できる状態になります。
 
-| Feature                                | Summary                                                                                                                                                                                                                                                     |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Responsive boilerplate | A responsive boilerplate optimized for the multi-screen web. Powered by [Material Design Lite](http://getmdl.io).  You're free to use either this or a completely clean-slate  via [basic.html](https://github.com/google/web-starter-kit/blob/master/app/basic.html).                          |
-| Sass support                           | Compile [Sass](http://sass-lang.com/) into CSS with ease, bringing support for variables, mixins and more. (Run `gulp serve` or `gulp` for production)                                                                                                      |
-| Performance optimization               | Minify and concatenate JavaScript, CSS, HTML and images to help keep your pages lean. (Run `gulp` to create an optimised version of your project to `/dist`)                                                                                                |
-| Code Linting               | JavaScript code linting is done using [ESLint](http://eslint.org) - a pluggable linter tool for identifying and reporting on patterns in JavaScript. Web Starter Kit uses ESLint with [eslint-config-google](https://github.com/google/eslint-config-google), which tries to follow the Google JavaScript style guide.                                                                                                |
-| ES2015 via Babel 6.0                   | Optional ES2015 support using [Babel](https://babeljs.io/). To enable ES2015 support remove the line `"only": "gulpfile.babel.js",` in the [.babelrc](.babelrc) file. ES2015 source code will be automatically transpiled to ES5 for wide browser support.  |
-| Built-in HTTP Server                   | A built-in server for previewing your site locally while you develop and iterate                                                                                                                                                                            |
-| Live Browser Reloading                 | Reload the browser in real-time anytime an edit is made without the need for an extension. (Run `gulp serve` and edit your files)                                                                                                                           |
-| Cross-device Synchronization           | Synchronize clicks, scrolls, forms and live-reload across multiple devices as you edit your project. Powered by [BrowserSync](http://browsersync.io). (Run `gulp serve` and open up the IP provided on other devices on your network)                       |
-| Offline support                     | Thanks to our baked in [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) [pre-caching](https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js#L226), sites deploying `dist` to a HTTPS domain will enjoy offline support. This is made possible by [sw-precache](https://github.com/GoogleChrome/sw-precache/).                                                                                                                                              |
-| PageSpeed Insights                     | Web performance metrics showing how well your site performs on mobile and desktop (Run `gulp pagespeed`)                                                                                                                                                    |
+初回は、コンテナに入って、コンテンツをビルドしてください。
+```
+sudo docker exec -it wsk bash
+npm install
+gulp 
+```
+このコンテナの起動は、 docker-compose で node_modules をデータコンテナに
+マウントしているので、一度、npm install したら、コンテナを停止しても、
+node_modules は維持されます。  
+※詳しくは [コンテナのソースリポジトリ](https://github.com/altus5/docker-web-stater-kit) を参照してください
 
-## Quickstart
+## ローカルでのデバッグ
 
-[Download](https://github.com/google/web-starter-kit/releases/latest) the kit or clone this repository and build on what is included in the `app` directory.
+gulp serve を実行すると、browser-syncで自動ビルドされてライブリロードされます。  
+ブログ記事の追加や、任意のページを追加したときは、ローカルで確認してから、プッシュしてください。
 
-There are two HTML starting points, from which you can choose:
+```
+gulp serve
+```
 
-- `index.html` - the default starting point, containing Material Design layout.
-- `basic.html` - no layout, but still includes our minimal mobile best-practices
+ブラウザからは、vagrantで起動したVMのIPでアクセスします。
+```
+http://192.168.66.10:3000/
+```
+このIPアドレスを hosts ファイルに dev.altus5.local として登録して、
+このホスト名で表示すると、会社概要の google map や、問い合わせページの js が
+正常に実行されます。
+```
+http://dev.altus5.local:3000/
+```
 
-Be sure to look over the [installation docs](docs/install.md) to verify your environment is prepared to run WSK.
-Once you have verified that your system can run WSK, check out the [commands](docs/commands.md) available to get started.
+gulp serve での watch は、リロードされるスピードを優先して、依存関係の追跡は、
+"ほどほど" にしています。  
+ライブリロードが反応しない場合は、 全体をリビルドしてから、再度、起動してください。  
+```
+gulp        # gulp の default でリビルドが実行されるようになっています
+gulp serve
+```
 
-## Web Performance
+## CircleCI の自動デプロイ
 
-Web Starter Kit strives to give you a high performance starting point out of the box. Our median Web Page Test [scores](http://www.webpagetest.org/result/151201_VW_XYC/) for the default template have a [Speed Index](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index) of ~1100 (1000 is ideal) and a repeat-visit Speed Index of ~550 thanks to Service Worker precaching.
+.circleci は、 CircleCI のための設定とデプロイスクリプトです。  
+このスクリプトは、以下の git のブランチで構成されていることを前提とします。  
 
-## Browser Support
+| ブランチ | 説明 |
+|:-------:|------|
+| draft   | 構築キットのソース。このブランチでコーディングする。 |
+| master  | 生成された静的コンテンツがコミットされるブランチ。|
 
-At present, we officially aim to support the last two versions of the following browsers:
+draft ブランチで、 ソースコードを管理し、 gulp によってコンテンツが生成されて、
+WEBページとして公開される静的ファイルは、 master ブランチにプッシュされます。
+2つのブランチで、それぞれ、異なるファイルを管理します。
 
-* Chrome
-* Edge
-* Firefox
-* Safari
-* Opera
-* Internet Explorer 9+
+## CircleCIとの連携
 
-This is not to say that Web Starter Kit cannot be used in browsers older than those reflected, but merely that our focus will be on ensuring our layouts work great in the above.
+### Integrationの設定  
+* githubの画面の右上のアイコンのプルダウンから、Integrations を選択  
+* CircleCI をクリック  
+* 画面に従って設定
 
-## Troubleshooting
+初期状態では、CircleCIは、リポジトリに対して、プッシュすることができないので、
+書き込み権限のあるSSHのキーを登録する。  
 
-If you find yourself running into issues during installation or running the tools, please check our [Troubleshooting](https://github.com/google/web-starter-kit/wiki/Troubleshooting) guide and then open an [issue](https://github.com/google/web-starter-kit/issues). We would be happy to discuss how they can be solved.
+### SSHキーの作成  
+ローカルで、SSHのキーを作成する  
+例)
+```
+ssh-keygen -t rsa -N "" -f id_rsa.sample
+```
 
-## A Boilerplate-only Option
+### github への公開キーの登録  
+https://github.com/アカウント/リポジトリ名/settings/keys  
+Integrations の設定で、CircleCIの方でも、このリポジトリを選択していたら、
+すでに、CircleCIの登録があるハズだが、これは、読み取り専用なので、
+「Add deploy key」ボタンを押して、次のように登録する。  
 
-If you would prefer not to use any of our tooling, delete the following files from the project: `package.json`, `gulpfile.babel.js` and `.travis.yml`. You can now safely use the boilerplate with an alternative build-system or no build-system at all if you choose.
+| 項目 |値|
+|:-----:|:-----|
+|Title|CircleCI 書き込み  (※なんでもよい) |
+|Key  |ssh-keygenで作成した id_rsa.sample.pub の内容を貼り付ける|
+|Allow write access| チェック （必須） |
+   
+### CircleCI への秘密キーの登録
+https://circleci.com/gh/アカウント/リポジトリ名/edit#ssh  
+「Add SSH Key」ボタンを押して、次のように登録する。 
 
-## Docs and Recipes
+| 項目 |値|
+|:-----:|:-----|
+|Hostname|github.com|
+|Private Key|ssh-keygenで作成した id_rsa.sample の内容を貼り付ける|
 
-* [File Appendix](https://github.com/google/web-starter-kit/blob/master/docs/file-appendix.md) - What do the different files here do?
-* [Using Material Design Lite's Sass](https://github.com/google/web-starter-kit/blob/master/docs/mdl-sass.md) - how to get MDL's Sass working with WSK
-* [Deployment guides](https://github.com/google/web-starter-kit/blob/master/docs/deploy.md) - available for Firebase, Google App Engine and other services.
-* [Gulp recipes](https://github.com/gulpjs/gulp/tree/master/docs/recipes) - the official Gulp recipes directory includes a comprehensive list of guides for different workflows you can add to your project.
+## 自動デプロイ
+以上の設定を行うと、 draft ブランチにプッシュする毎に、CircleCI で gulp が実行されて
+生成された静的コンテンツが master ブランチにデプロイされます。  
+GitHub Pages で公開されているWEBサイトは、ダウンタイム無しで更新されます。  
 
-## Inspiration
 
-Web Starter Kit is inspired by [Mobile HTML5 Boilerplate](https://html5boilerplate.com/mobile/) and Yeoman's [generator-gulp-webapp](https://github.com/yeoman/generator-webapp), having taken input from contributors to both projects during development. Our [FAQs](https://github.com/google/web-starter-kit/wiki/FAQ) attempt to answer commonly asked questions about the project.
+## ステージングでの最終確認
 
-## Contributing
+ステージング環境として、以下のリポジトリを使っています。  
+<https://github.com/char-siu-men/char-siu-men.github.io>
 
-Contributions, questions and comments are all welcome and encouraged. For code contributions to Web Starter Kit, please see our [Contribution guide](CONTRIBUTING.md) before submitting a pull request. [Website](https://developers.google.com/web/tools/starter-kit/) related issues should be filed on the [Web Fundamentals](https://github.com/google/WebFundamentals/issues/new) issue tracker.
+このリポジトリにプッシュすると、次のURLで閲覧できます。  
+<https://char-siu-men.github.io/>
 
-## License
+CircleCIのスクリプトのテストや、本番公開前の確認が必要な場合は、
+このリポジトリを使ってください。
 
-Apache 2.0  
-Copyright 2015 Google Inc
+また、テストが終わったら、コンテンツを削除してください。  
+間違うと痛いので、別のディレクトリに clone してから実行してください。
+```
+mkdir hoge
+cd hoge
+git clone git@github.com:char-siu-men/char-siu-men.github.io.git .
+find . -maxdepth 1 ! -name '.' ! -name '.git' -exec rm -rf {} \;
+git add -fA
+git commit --allow-empty -m "$(git log -1 --pretty=%B) [ci skip]"
+git push -f origin master
+```
