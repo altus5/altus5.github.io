@@ -58,12 +58,14 @@ gulp.task('images', () =>
 // Copy all files at the root level (app)
 gulp.task('copy', () =>
   gulp.src([
-    'app/*',
+    'app/**/*',
     '!app/_*/*',
     '!app/**/_*',
     '!app/**/*.md',
     '!app/**/*.ejs',
     '!app/**/*.html',
+    '!app/styles/**/*',
+    '!app/scripts/**/*',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
     dot: true
