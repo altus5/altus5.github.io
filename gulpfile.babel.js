@@ -31,7 +31,7 @@ const xmlNormalizeOpts = {
     cdata: true
   }
 };
-
+ 
 // Lint JavaScript
 gulp.task('lint', () =>
   gulp.src([
