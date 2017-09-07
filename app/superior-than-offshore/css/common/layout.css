@@ -1,0 +1,269 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	デフォルトスタイル
+------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	outline: 0;
+
+	font-size: 1em;
+}
+
+body {
+	font-size: 62.5%;
+}
+
+body,
+table,
+input, textarea, select, option {
+	font-family: Meiryo, "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", sans-serif;
+}
+
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+:focus {
+	outline: 0;
+}
+
+ins {
+	text-decoration: none;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+img {
+	vertical-align: top;
+}
+
+a,
+a:link {
+	color: #040404;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #040404;
+}
+
+a:hover {
+	color: #040404;
+}
+
+a:active {
+	color: #040404;
+}
+
+a:hover img {
+	opacity: 0.7;
+}
+
+/*------------------------------------------------------------
+	レイアウト
+------------------------------------------------------------*/
+body {
+	color: #222;
+	font-size: 14px;
+	line-height: 1.5;
+	text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	background-color: #FFF;
+}
+
+#container {
+	text-align: left;
+	position: relative;
+}
+
+#main .mainVisual {
+	padding: 306px 0 89px;
+	position: relative;
+	background: url(../../img/index/main_visual.jpg) no-repeat center top;
+	background-size: cover;
+}
+
+#main .mainVisual .textBox {
+	margin: 0 auto;
+	width: 1272px;
+}
+
+#main .mainVisual p {
+	margin-bottom: 245px;
+	color: #FFF;
+	font-family: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif;
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+#main .mainVisual a {
+	padding: 27px 37px 30px;
+	display: inline-block;
+	color: #FFF;
+	font-size: 22px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	position: relative;
+	border: 2px solid #FFF;
+	border-radius: 4px;
+}
+
+#main .mainVisual a:after {
+	margin-left: -9px;
+	width: 18px;
+	height: 10px;
+	background: url(../../img/index/icon01.png) no-repeat center center;
+	background-size: 18px 10px;
+	position: absolute;
+	bottom: 11%;
+	left: 50%;
+  
+	content: ""; 
+}
+
+#main .mainVisual a:hover {
+	opacity: 0.7;
+}
+
+/*------------------------------------------------------------
+	ヘッダー
+------------------------------------------------------------*/
+#gHeader {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+#gHeader h1 {
+	margin: 0 auto;
+	width: 980px;
+}
+
+#gHeader h1 a {
+	padding: 30px 22px;
+	display: inline-block;
+	background-color: rgba(0,0,0,0.5);
+	filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7000000);
+}
+
+.sp {
+	display: none !important;
+}
+
+@media all and (min-width: 0) and (max-width: 767px) {
+
+	.sp {
+		display: block !important;
+	}
+	
+	.pc {
+		display: none !important;
+	}
+			
+	a:hover img {
+		opacity: 1;
+	}
+	
+	body {
+		font-size: 12px;
+		line-height: 1.4;
+	}
+	
+	#gHeader h1 {
+		margin: 0 30px;
+		width: auto;
+	}
+	
+	#gHeader h1 a {
+		padding: 15px 10px;
+	}
+	
+	#gHeader h1 a img {
+		width: 100px;
+	}
+	
+	#main .mainVisual {
+		height: 200px;
+		padding: 130px 0 30px;
+	}
+	
+	#main .mainVisual .textBox {
+		margin: 0 20px;
+		width: auto;
+	}
+	
+	#main .mainVisual p {
+		margin-bottom: 90px;
+		font-size: 25px;
+		letter-spacing: 0;
+	}
+
+	#main .mainVisual a {
+		padding: 15px 20px;
+		font-size: 11px;
+		letter-spacing: 0;
+		border-width: 1px;
+	}
+	
+	#main .mainVisual a:after {
+		margin-left: -5px;
+		width: 10px;
+		height: 5px;
+		background-size: 10px 5px;
+	}
+	
+	#main .mainVisual a:hover {
+		opacity: 1;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 1271px) {
+	#gHeader h1 {
+		margin: 0 60px;
+		width: auto;
+	}
+	
+	#main .mainVisual {
+		 padding: 250px 0 60px;
+	}
+	
+	#main .mainVisual .textBox {
+		margin: 0 15px;
+		width: auto;
+	}
+	
+	#main .mainVisual p {
+		margin-bottom: 150px;
+		font-size: 40px;
+	}
+	
+	#main .mainVisual a {
+		padding: 20px 37px;
+	}
+}

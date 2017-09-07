@@ -1,0 +1,1515 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	トープページ
+------------------------------------------------------------*/
+#main .headLine01 {
+	padding: 42px 0 57px;
+	color: #FFF;
+	font-size: 34px;
+	font-weight: normal;
+	letter-spacing: 3px;
+	text-align: center;
+	position: relative;
+	background: #222 url(../img/index/h2_bg01.jpg) no-repeat center top;
+}
+
+#main .headLine01:after {
+	width: 100%;
+	height: 9px;
+	background: url(../img/index/bg01.png) repeat-x center center;
+	background-size: 60px 9px;
+	position: absolute;
+	left: 0;
+	bottom: -9px;
+
+	content: "";
+}
+
+#main .headLine02 {
+	font-size: 30px;
+	text-align: center;
+	position: relative;
+}
+
+#main .imgList li {
+	width: 25%;
+	float: left;
+}
+
+#main .imgList li img {
+	width: 100%;
+}
+
+#main .solvedBox .headLine02 {
+	margin: -17px 0 94px;
+	padding: 52px 0 69px;
+	background-color: #FBF9B1;
+}
+
+#main .solvedBox .headLine02:before {
+	width: 100%;
+	height: 9px;
+	background: url(../img/index/bg02.png) repeat-x center center;
+	background-size: 61px 9px;
+	position: absolute;
+	top: -9px;
+	left: 0;
+
+	content: "";
+}
+
+#main .inner {
+	margin: 0 auto;
+	width: 980px;
+}
+
+#main .solvedBox {
+	padding-bottom: 51px;
+}
+
+#main .solvedBox .inner .ttl01 {
+	margin-bottom: 40px;
+	color: #364a91;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.45;
+	position: relative;
+}
+
+#main .solvedBox .inner .ttl01 span {
+	margin-left: -190px;
+	padding: 20px 15px 21px 50px;
+	position: absolute;
+	color: #FFF;
+	font-size: 30px;
+	letter-spacing: 2px;
+	background-color: #364A90;
+	top: -137px;
+	left: 50%;
+}
+
+#main .solvedBox .inner .ttl01 span:after {
+	margin-left: -13px;	
+	width: 26px;
+	height: 22px;
+	background: url(../img/index/icon02.png) no-repeat center center;
+	background-size: 26px 22px;
+	position: absolute;
+	left: 50%;
+	bottom: -22px;
+
+	content: "";
+}
+
+#main .solvedBox .imgBox {
+	padding-right: 15px;
+}
+
+#main .solvedBox .imgBox .photoBox {
+	margin-top: 11px;
+	width: 490px;
+	float: left;
+}
+
+#main .solvedBox .imgBox .photoBox img {
+	width: 100%;
+}
+
+#main .solvedBox .imgBox .textBox {
+	width: 443px;
+	float: right;
+	line-height: 2.08;
+}
+
+#main .solvedBox .ttl02 {
+	margin-bottom: 20px;
+	padding: 24px 0 21px;
+	color: #FFF;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #364A90;
+	border-top: 4px solid #222;
+}
+
+#main .speedBox {
+	padding: 43px 0 63px;
+	text-align: center;
+	background-color: #364A90;
+}
+
+#main .speedBox .headLine02 {
+	margin-bottom: 36px;
+	color: #FFF;
+}
+
+#main .speedBox ul {
+	margin: 0 -37px 50px 0;
+}
+
+#main .speedBox ul li {
+	margin-right: 37px;
+	width: 302px;
+	float: left;
+}
+
+#main .speedBox ul li .photo {
+	margin-bottom: 18px;
+}
+
+#main .speedBox ul li .photo img {
+	width: 100%;
+}
+
+#main .speedBox ul li .text {
+	margin: 0 11px;
+}
+
+#main .speedBox p {
+	color: #FFF;
+}
+
+#main .speedBox ul li .text .ttl {
+	margin-bottom: 11px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#main .speedBox ul li .text .txt {
+	padding-right: 10px;
+	height: 116px;
+	display: table-cell;
+	text-align: left;
+	line-height: 1.42;
+}
+
+#main .speedBox .textLink a {
+	padding: 14px 15px 11px 5px;
+	display: inline-block;
+	width: 280px;
+	position: relative;
+	color: #364a91;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background-color: #FBF9B1;
+}
+
+#main .speedBox .textLink a:after {
+	margin-top: -8px;	
+	width: 9px;
+	height: 16px;
+	background: url(../img/index/icon03.png) no-repeat center center;
+	background-size: 9px 16px;
+	position: absolute;
+	right: 3%;
+	top: 50%;
+
+	content: "";
+}
+
+#main .speedBox .textLink a:hover {
+	opacity: 0.7;
+}
+
+#main .speedBox .note {
+	margin-bottom: 19px;
+	font-weight: bold;
+}
+
+#main .speedBox .lastLink a {
+	padding: 27px 15px 23px 5px;
+}
+
+#main .compareBox {
+	padding: 47px 0 63px;
+	background-color: #212121;
+}
+
+#main .compareBox .headLine02 {
+	margin-bottom: 62px;
+	color: #FFF;
+	line-height: 1.3;
+}
+
+#main .compareBox .headLine02 span {
+	border-bottom: 6px solid #364A90;
+}
+
+#main .compareBox .inner {
+	padding: 0 20px;
+	width: auto;
+	max-width: 988px;
+}
+
+#main .compareBox .compareUl {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#main .compareBox .compareUl > li {
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+}
+
+#main .compareBox .compareUl > li:first-child {
+	padding-right: 32px;
+}
+
+#main .compareBox .compareUl > li:last-child {
+	padding: 0 0 0 32px;
+}
+
+#main .compareBox li li {
+	margin-bottom: 10px;
+	padding: 23px 0 22px;
+	position: relative;
+	display: table;
+	color: #364a91;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center;
+	background-color: #D0D0D0;
+}
+
+#main .compareBox .high li {
+	background-color: #FFF;
+	border-color: #FFF;
+}
+
+#main .compareBox li .ttl {
+	color: #FFF;
+	border: 4px solid #FFF;
+	background-color: #212121;
+}
+
+#main .compareBox li .seLi {
+	padding: 12px 0 10px;
+	display: table;
+}
+
+#main .compareBox li .seLi span {
+	height: 70px;
+	display: table-cell;
+	vertical-align: middle;
+	line-height: 1.3;
+}
+
+#main .compareBox li li img {
+	margin: -46px 0 0 -12px;
+	position: absolute;
+	left: 100%;
+	top: 50%;
+	z-index: 100;
+}
+
+#main .questionBox {
+	padding: 53px 0 30px;
+}
+
+#main .questionBox .headLine02 {
+	margin-bottom: 36px;
+	padding-bottom: 20px;
+	border-bottom: 4px solid #212121;
+}
+
+#main .questionBox dl {
+	margin: 0 auto; 
+	width: 720px;
+}
+
+#main .questionBox dt {
+	margin-bottom: 28px;
+	min-height: 47px;
+	padding-left: 70px;
+	position: relative;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.32;
+}
+
+#main .questionBox .question span {
+	padding-top: 10px;
+	display: inline-block;
+}
+
+#main .questionBox dd {
+	margin-bottom: 35px;
+	min-height: 40px;
+	padding: 0 0 24px 70px;
+	position: relative;
+	line-height: 1.45;
+	border-bottom: 1px solid #E2E2E2;
+}
+
+#main .questionBox img {
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+
+#main .questionBox dt img {
+	margin-top: -30px;
+}
+
+#main .questionBox dd img {
+	top: -16px;
+}
+
+#main .voiceBox {
+	padding: 53px 0 35px;
+	background-color: #FBF9B1;
+}
+
+#main .voiceBox .headLine02 {
+	margin-bottom: 36px;
+}
+
+#main .voiceBox .headLine02 img {
+	margin-left: -30px;
+	position: absolute;
+	top: -67px;
+	left: 50%;
+}
+
+#main .voiceBox .imgArea {
+	margin: 0 auto;
+	width: 878px;
+	font-size: 13px;
+	line-height:1.52;
+}
+
+#main .voiceBox .textBox {
+	float: left;
+	width: 560px;
+}
+
+#main .voiceBox .textBox p {
+	margin-bottom: 21px;
+}
+
+#main .voiceBox .photoBox {
+	margin-top: 2px;
+	float: right;
+	width: 296px;
+}
+
+#main .voiceBox .photoBox .photo {
+	margin-bottom: 11px;
+}
+
+#main .voiceBox .photoBox .photo img {
+	width: 100%;
+}
+
+#main .voiceBox .photoBox p {
+	margin-bottom: 16px;
+}
+
+#main .voiceBox .photoBox span {
+	margin-top: 3px;
+	display: block;
+	font-size:18px;
+	font-weight: bold;
+}
+
+#main .logoBox {
+	overflow: hidden;
+	text-align: center;
+	background-color: #fbf9b1;
+}
+
+#main .logoBox span {
+	position: relative;
+	left: -100%;
+	padding: 14px 0 13px;
+	display: block;
+	background-color: #FFF;
+}
+
+
+#main .basicBox {
+	padding: 16px 0 0;
+	background-color: #94332A;
+}
+
+#main .basicBox .headLine02 {
+	color: #FFF;
+}
+
+#main .basicBox .inner {
+	height: 1202px;
+	position: relative;
+	background: url(../img/index/bg03.png) no-repeat 50px 61px;
+}
+
+#main .basicBox h3 {
+	padding: 59px 0 53px;
+	width: 136px;
+	color: #94342b;
+	font-size: 16px;
+	position: absolute;
+	left: 0;
+	top: 3px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #FFF;
+}
+
+#main .basicBox .h3Ttl02 {
+	top: 812px;
+}
+
+#main .basicBox .ttl {
+	color: #FFF;
+	font-weight: bold;
+	font-size: 18px;
+	position: absolute;
+	top: 70px;
+	left: 257px;
+}
+
+#main .basicBox .ttl02 {
+	top: 291px;
+	left: 127px;
+}
+
+#main .basicBox .ttl03 {
+	top: 415px;
+	left: 200px;
+}
+
+#main .basicBox .ttl04 {
+	top: 596px;
+	left: 90px;
+}
+
+#main .basicBox .ttl05 {
+	top: 715px;
+	left: 165px;
+}
+
+#main .basicBox .ttl06 {
+	top: 1000px;
+	left: 165px;
+}
+
+#main .basicBox .text {
+	padding: 18px 15px 23px 20px;
+	position: absolute;
+	left: 370px;
+	top: 70px;
+	color: #333;
+	line-height: 1.43;
+	background-color: #FFF;
+}
+
+#main .basicBox .text:before {
+	width: 8px;
+	height: 17px;
+	background: url(../img/index/icon05.png)  no-repeat left top;
+	background-size: 8px 17px;
+	position: absolute;
+	top: 5px;
+	left: -8px;
+  
+	content: ""; 
+}
+
+#main .basicBox .text02 {
+	top: 291px;
+}
+
+#main .basicBox .text03 {
+	top: 415px;
+}
+
+#main .basicBox .text04 {
+	top: 596px;
+}
+
+#main .basicBox .text05 {
+	top: 720px;
+}
+
+#main .basicBox .text06 {
+	top: 1000px;
+}
+
+#main .basicBox .pink {
+	background-color: #FFD7D5;
+}
+
+#main .basicBox .pink:before {
+	background-image: url(../img/index/icon06.png);
+}
+
+#main .advanBox {
+	margin-top: -21px;
+	padding-bottom: 40px;
+}
+
+#main .advanBox .headLine02 {
+	margin-bottom: 18px;
+	color: #364a91;
+	font-size: 44px;
+	letter-spacing: -1px;
+}
+
+#main .advanBox .headLine02 img {
+	vertical-align: baseline;
+}
+
+#main .advanBox .advan {
+	margin: 0 34px 24px 66px;
+}
+
+#main .advanBox dt {
+	float: left;
+	position: relative;
+}
+
+#main .advanBox dt .num {
+	position: absolute;
+	left: -32px;
+	top: -19px;
+}
+
+#main .advanBox dd {
+	margin-top: 13px;
+	padding: 19px 0 16px 15px;
+	width: 730px;
+	float: right;
+	position: relative;
+	color: #364a91;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.45;
+	letter-spacing: -0.5px;
+	border: 4px solid #364A90;
+	box-sizing: border-box;
+}
+
+#main .advanBox dd:before {
+	margin-top: -10px;
+	width: 13px;
+	height: 19px;
+	background: url(../img/index/icon08.gif) no-repeat center center;
+	background-size: 13px 19px;
+	position: absolute;
+	top: 50%;
+	left: -13px;
+  
+	content: "";
+}
+
+#main .advanBox .imgBox {
+	margin: 19px 23px 0 150px;
+}
+
+#main .advanBox .photoBox {
+	float: left;
+}
+
+#main .advanBox .photoBox img {
+	margin: 7px 0 0 14px;
+}
+
+#main .advanBox .photoBox .photo {
+	margin-top: 38px;
+}
+
+#main .advanBox .textBox {
+	width: 516px;
+	float: right;
+	color: #333;
+	line-height: 1.85;
+}
+
+#main .advanBox .textBox .color {
+	margin-bottom: 17px;
+	color: #f77c7c;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.45;
+	letter-spacing: -1px;
+}
+
+#main .slerBox {
+	padding: 70px 0 40px; 
+	position: relative;
+	background-color: #212121;
+}
+
+#main .slerBox:before {
+	width: 100%;
+	height: 9px;
+	background: url(../img/index/bg04.png) repeat-x left top;
+	background-size: 60px 9px;
+	position: absolute;
+	top: -9px;
+	left: 0;
+  
+	content: "";
+}
+
+#main .slerBox .headLine02 {
+	margin-bottom: 35px;
+	color: #FFF;
+	font-size: 34px;
+	font-weight: normal;
+}
+
+#main .slerBox ul {
+	margin-bottom: 78px;
+}
+
+#main .slerBox li {
+	width: 25%;
+	float: left;
+	position: relative;
+}
+
+#main .slerBox li img {
+	width: 100%;
+}
+
+#main .slerBox li span {
+	width: 270px;
+	color: #FFF;
+	font-size: 18px;
+	position: absolute;
+	top: 36px;
+	left: 32px;
+	font-weight: bold;
+}
+
+#main .slerBox li .txt02 {
+	font-size: 14px;
+	font-weight: normal;
+	top: 391px;
+	line-height: 1.7;
+}
+
+#main .slerBox p {
+	font-size: 30px;
+	color: #FFF;
+	text-align: center;
+}
+
+#main .possibleBox h2 {
+	position: relative;
+	text-align: center;
+	background-color: #0F61C5;
+	box-shadow: 0 0 10px #333;
+}
+
+#main .possibleBox h2:after {
+	margin-left: -75px;
+	width: 130px;
+	height: 48px;
+	background: url(../img/index/icon07.png) no-repeat left top;
+	background-size: 130px 48px;
+	position: absolute;
+	left: 50%;
+	bottom: -48px;
+  
+	content: "";
+}
+
+#main .possibleBox .textArea {
+	padding: 70px 0 42px;
+	background: #E2E2E2 url(../img/index/bg05.jpg) no-repeat right top;
+}
+
+#main .possibleBox .textBox {
+	margin: 0 auto;
+	width: 860px;
+}
+
+#main .possibleBox p {
+	margin-bottom: 12px;
+	width: 480px;
+	color: #333;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 2.25;
+}
+
+#main .possibleBox .colorText {
+	margin-bottom: 23px;
+	color: #a42424;
+	font-size: 19px;
+	line-height: 1.8;
+}
+
+#main .possibleBox .smallText {
+	margin-bottom: 37px;
+	font-size: 14px;
+	line-height: 1.35;
+}
+
+#main .possibleBox .smallText span {
+	font-size: 18px;
+}
+
+@media all and (min-width: 0) and (max-width: 767px) {
+	#main .headLine01 {
+		padding: 14px 0 20px;
+		font-size: 18px;
+		letter-spacing: 0;
+		background-size: 230px 60px;
+	}
+
+	#main .headLine01:after {
+		background-size: auto 6px;
+		height: 6px;
+		bottom: -6px;
+	}
+
+	#main .headLine02 {
+		padding: 0 10px;
+		font-size: 18px;
+	}
+	
+	#main .imgList li {
+		width: 50%;
+		border: 1px solid #CCC;
+		box-sizing: border-box;
+	}
+	
+	#main .solvedBox .headLine02 {
+		margin: -9px 0 60px;
+		padding: 20px 10px;
+	}
+	
+	#main .solvedBox .headLine02:before {
+		height: 5px;
+		background-size: 40px 5px;
+		top: -5px;
+	}
+	
+	#main .inner {
+		margin: 0 15px;
+		width: auto;
+	}
+	
+	#main .solvedBox .inner .ttl01 {
+		margin-bottom: 15px;
+		font-size: 16px;
+	}
+	
+	#main .solvedBox .inner .ttl01 span {
+		margin-left: -110px;
+		padding: 10px 10px 10px 20px;
+		font-size: 20px;
+		letter-spacing: 0;
+		top: -70px;
+	}
+	
+	#main .solvedBox .inner .ttl01 span:after {
+		margin-left: -7px;	
+		width: 14px;
+		height: 12px;
+		background-size: 14px 12px;
+		bottom: -12px;
+	}
+	
+	#main .solvedBox .imgBox {
+		margin-bottom: 10px;
+		padding-right: 0;
+	}
+	
+	#main .solvedBox .imgBox .photoBox {
+		margin: 0 0 10px;
+		width: auto;
+		float: none;
+	}
+	
+	#main .solvedBox .imgBox .textBox {
+		width: auto;
+		float: none;
+		line-height: 1.4;
+	}
+	
+	#main .solvedBox .ttl02 {
+		margin-bottom: 10px;
+		padding: 10px 6px;
+		font-size: 16px;
+		border-top-width: 2px;
+	}
+	
+	#main .solvedBox .photo img {
+		width: 100%;
+	}
+	
+	#main .speedBox {
+		padding: 20px 0 30px;
+	}
+	
+	#main .speedBox .headLine02 {
+		margin-bottom: 20px;
+	}
+	
+	#main .speedBox ul {
+		margin: 0 0 20px;
+	}
+	
+	#main .speedBox ul li {
+		margin: 0 0 15px;
+		width: auto;
+		float: none;
+	}	
+	
+	#main .speedBox ul li .photo {
+		margin-bottom: 10px;
+	}
+		
+	#main .speedBox ul li .text .ttl {
+		margin-bottom: 6px;
+		font-size: 15px;
+	}	
+		
+	#main .speedBox ul li .text .txt {
+		margin-bottom: 10px;
+		display: block;
+		padding-right: 0;
+		height: auto;
+		line-height: 1.4;
+	}
+	
+	#main .speedBox .textLink a {
+		padding: 10px 15px 10px 5px;
+	}
+	
+	#main .speedBox .textLink a:hover {
+		opacity: 1;
+	}
+	
+	#main .compareBox {
+		padding: 20px 0 30px;
+	}
+	
+	#main .compareBox .headLine02 {
+		margin-bottom: 30px;
+		line-height: 1.6;
+	}
+	
+	#main .compareBox .headLine02 span {
+		border-bottom-width: 2px;
+	}
+	
+	#main .compareBox .compareUl {
+		font-size: 15px;
+		margin-right: 0;
+	}
+	
+	#main .compareBox .compareUl > li {
+		margin: 0 0 30px;
+		width: auto;
+		float: none;
+	}
+
+	#main .compareBox .compareUl > li:first-child {
+		padding-right: 0;
+	}
+	
+	#main .compareBox .compareUl > li:last-child {
+		padding: 0;
+	}
+	
+	#main .compareBox .compareUl ul li {
+		margin-bottom: 5px;
+		padding: 11px 0;
+		border-width: 2px;
+	}
+		
+	#main .compareBox li .seLi {
+		display: block;
+		padding: 11px 0;
+	}
+	
+	#main .compareBox li .seLi span {
+		display: block;
+		height: auto;
+	}
+	
+	#main .questionBox {
+		padding: 20px 0;
+	}
+	
+	#main .questionBox .headLine02 {
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		border-bottom-width: 2px;
+	}
+	
+	#main .questionBox dl {
+		margin: 0 10px; 
+		width: auto;
+	}
+	
+	#main .questionBox dt {
+		margin-bottom: 20px;
+		min-height: 0;
+		padding-left: 50px;
+		font-size: 15px;
+	}
+	
+	#main .questionBox .question {
+		padding-top: 0px;
+	}
+	
+	#main .questionBox dd {
+		margin-bottom: 20px;
+		padding: 0 0 12px 50px;
+	}
+	
+	#main .questionBox img {
+		width: 40px;
+	}
+	
+	#main .questionBox dt img {
+		margin-top: -20px;
+	}
+	
+	#main .questionBox dd img {
+		top: -13px;
+	}
+	
+	#main .voiceBox {
+		padding: 25px 0;
+	}
+	
+	#main .voiceBox .headLine02 {
+		margin-bottom: 20px;
+	}
+	
+	#main .voiceBox .headLine02 img {
+		margin-left: -20px;
+		width: 40px;
+		top: -40px;
+	}
+	
+	#main .voiceBox .imgArea {
+		margin: 0 15px;
+		width: auto;
+		font-size: 13px;
+		line-height: 1.52;
+	}
+	
+	#main .voiceBox .textBox {
+		width: auto;
+		float: none;
+	}
+	
+	#main .voiceBox .textBox p {
+		margin-bottom: 10px;
+	}	
+	
+	#main .voiceBox .photoBox {
+		margin-top: 0;
+		width: auto;
+		float: none;
+	}
+	
+	#main .voiceBox .photoBox .photo img {
+		width: 100%;
+	}
+	
+	#main .logoBox span {
+		padding: 7px;
+	}
+	
+	#main .logoBox span img {
+		width: 120px;
+	}
+	
+	#main .basicBox {
+		padding: 16px 0;
+		background-color: #94332a;
+	}
+	
+	#main .basicBox .headLine02 {
+		margin-bottom: 20px;
+	}
+	
+	#main .basicBox .inner {
+		height: auto;
+		background: none;
+	}	
+	
+	#main .basicBox h3 {
+		margin-bottom: 10px;
+		padding: 10px;
+		width: auto;
+		position: static;
+		border-radius: 0;
+	}	
+	
+	#main .basicBox .ttl {
+		margin-bottom: 5px;
+		font-size: 16px;
+		position: static;
+	}
+
+	#main .basicBox .text {
+		margin-bottom: 8px;
+		padding: 10px;
+		position: static;
+		line-height: 1.4;
+	}
+	
+	#main .basicBox .text05 {
+		margin-bottom: 20px;
+	}
+	
+	#main .basicBox .text:before {
+		background: none;
+	}
+	
+	#main .advanBox {
+		margin-top: -11px;
+		padding-bottom: 30px;
+	}
+		
+	#main .advanBox .headLine02 {
+		margin-bottom: 20px;
+		font-size: 20px;
+	}
+	
+	#main .advanBox .headLine02 img {
+		width: 100px;
+	}
+	
+	#main .advanBox .advan {
+		margin: 0 0 20px;
+	}
+	
+	#main .advanBox .advan dl {
+		margin-bottom: 20px;
+	}
+	
+	#main .advanBox .advan dt {
+		width: 18%;
+	}
+	
+	#main .advanBox .advan dt img {
+		width: 100%;
+	}
+	
+	#main .advanBox .advan dt .num {
+		width: 40%;
+   		top: -8%;
+		left: -8%;
+	}
+	
+	#main .advanBox dd {
+		margin-top: 5px;
+		padding: 5px;
+		width: 80%;
+		font-size: 14px;
+	}
+	
+	#main .advanBox .imgBox {
+		margin: 0 0 0 10px;
+	}
+	
+	#main .advanBox .photoBox {
+		width: 20%;
+	}
+	
+	#main .advanBox .photoBox img {
+		margin: 0;
+		width: 100%;
+	}
+	
+	#main .advanBox .photoBox .photo {
+		margin-top: 0;
+	}
+	
+	#main .advanBox .textBox {
+		width: 76%;
+		line-height: 1.5;
+	}
+	
+	#main .advanBox .textBox .color {
+		margin-bottom: 10px;
+		font-size: 14px;
+	}
+	
+	#main .slerBox {
+		padding: 30px 0;
+	}
+	
+	#main .slerBox:before {
+		height: 5px;
+		top: -5px;
+		background-size: 40px 5px;
+	}
+	
+	#main .slerBox .headLine02 {
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
+	
+	#main .slerBox ul {
+		margin-bottom: 0px;
+	}
+	
+	#main .slerBox li {
+		width: 100%;
+	}
+	
+	#main .slerBox li span {
+		font-size: 16px;
+		left: 8%;
+		top: 8%;
+		width: 90%;
+	}
+	
+	#main .slerBox li .txt02 {
+		font-size: 14px;
+		line-height: 1.5;
+		top: auto;
+		bottom: 10%;
+	}
+	
+	#main .slerBox p {
+		padding: 0 10px;
+		font-size: 20px;
+	}
+
+	#main .possibleBox h2 img {
+		width: 100%;
+	}
+		
+	#main .possibleBox h2:after {
+		margin-left: -13px;
+		width: 26px;
+		height: 17px;
+		bottom: -17px;
+		background-size: 26px 17px;
+	}
+	
+	#main .possibleBox .textArea {
+		padding: 0 0 20px;
+		background: #e2e2e2 none;
+	}
+	
+	#main .possibleBox .textBox {
+		width: auto;
+	}
+	
+	#main .possibleBox .photo {
+		margin-bottom: 10px;
+		overflow: hidden;
+	}
+	
+	#main .possibleBox .photo img {
+		margin-left: -80%;
+		width: 180%;
+	}
+		
+	#main .possibleBox p {
+		margin: 0 15px 15px;
+		font-size: 14px;
+		line-height: 1.5;
+		width: auto;
+	}
+	
+	#main .possibleBox .colorText {
+		margin-bottom: 15px;
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	
+	#main .possibleBox .smallText {
+		font-size: 12px;
+		margin-bottom: 20px;
+	}
+	
+	#main .possibleBox .smallText span {
+		font-size: 16px;
+	}
+}
+
+@media all and (min-width: 0) and (max-width: 427px) {
+	#main .possibleBox p a img {
+		width: 100%;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 1271px) {
+	#main .headLine01 {
+		padding: 30px 0;
+	}
+
+	#main .solvedBox .headLine02 {
+		margin: -17px 0 70px;
+		padding: 45px 10px;
+	}
+	
+	#main .inner {
+		margin: 0 30px;
+		width: auto;
+	}
+	
+	#main .solvedBox .inner .ttl01 span {
+		padding: 10px 15px 10px 50px;
+		top: -100px;
+	}
+	
+	#main .solvedBox .imgBox {
+		padding-right: 0;
+	}
+	
+	#main .solvedBox .imgBox .photoBox {
+		margin-top: 0;
+		width: 48%;
+	}
+	
+	#main .solvedBox .imgBox .textBox {
+		width: 48%;
+	}
+	
+	#main .solvedBox .ttl02 {
+		font-size: 26px;
+		padding: 16px 0;
+	}
+	
+	#main .solvedBox .photo img {
+		width: 100%;
+	}
+	
+	#main .speedBox ul {
+		margin-right: 0;
+	}
+	
+	#main .speedBox ul li {
+		margin-right: 2%;
+		width: 32%;
+	}
+	
+	#main .speedBox ul li:last-child {
+		margin-right: 0;
+	}
+	
+	#main .speedBox ul li .text .ttl {
+		font-size: 15px;
+		font-weight: bold;
+		margin-bottom: 11px;
+	}
+	
+	#main .speedBox ul li .text .txt {
+		margin-bottom: 10px;
+    	display: block;
+		height: auto;
+	}
+	
+	#main .speedBox .textLink a {
+		width: 100%;
+		display: inline-block;
+		font-size: 14px;
+	}
+	
+	#main .speedBox .lastLink a {
+		width: 50%;
+	}
+	
+	#main .compareBox .inner {
+		margin: 0 auto;
+	}
+
+	
+	#main .voiceBox .imgArea {
+		margin: 0 30px;
+		width: auto;
+	}
+	
+	#main .voiceBox .textBox {
+		width: 60%;
+	}
+	
+	#main .voiceBox .photoBox {
+		margin-top: 2px;
+		width: 38%;
+	}
+	
+	#main .voiceBox .photoBox .photo img {
+		width: 100%;
+	}
+	
+	#main .advanBox .headLine02 {
+		font-size: 40px;
+	}
+	
+	#main .advanBox .advan {
+		margin: 0 0 24px;
+	}
+	
+	#main .advanBox dt .num {
+		left: -20px;
+		top: -15px;
+	}
+	
+	#main .advanBox dd {
+		width: 80%;
+	}
+	
+	#main .advanBox .imgBox {
+		margin-left: 20%;
+	}
+	
+	#main .advanBox .photoBox {
+		width: 20%;
+	}
+	
+	#main .advanBox .photoBox img {
+		margin: 0;
+		width: 100%;
+	}
+	
+	#main .advanBox .photoBox .photo {
+		margin-top: 0;
+	}
+	
+	#main .advanBox .textBox {
+		width: 78%;
+	}
+	
+	#main .slerBox {
+		padding: 50px 0 30px;
+	}
+	
+	#main .slerBox ul {
+		margin-bottom: 120px;
+	}
+	
+	#main .slerBox li span {
+		width: 90%;
+		font-size: 14px;
+		left: 10px;
+		top: 15px;
+	}
+	
+	#main .slerBox li .txt02 {
+		top: 60%;
+		bottom: 0;
+		font-size: 11px;
+	}
+	
+	#main .slerBox p {
+		font-size: 26px;
+	}
+
+	#main .possibleBox h2 img {
+		width: 100%;
+	}	
+	
+	#main .possibleBox h2:after {
+		margin-left: -50px;
+		width: 100px;
+		height: 30px;
+		background-size: 100px 30px;
+		bottom: -30px;
+	}
+	
+	#main .possibleBox .textBox {
+		width: 910px;
+	}
+	
+	#main .possibleBox p {
+		margin-bottom: 10px;
+		width: 50%;
+		font-size: 14px;
+	}
+	
+	#main .possibleBox .colorText {
+		font-size: 16px;
+		margin-bottom: 20px;
+	}
+	
+	#main .possibleBox .smallText {
+		margin-bottom: 20px;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 943px) {
+	#main .basicBox {
+		padding-bottom: 20px;
+	}
+	
+	#main .basicBox .headLine02 {
+		margin-bottom: 20px;
+	}
+	
+	#main .basicBox .inner {
+		height: auto;
+		background: none;
+	}	
+	
+	#main .basicBox h3 {
+		margin-bottom: 10px;
+		padding: 10px;
+		width: auto;
+		position: static;
+		border-radius: 0;
+	}	
+	
+	#main .basicBox .ttl {
+		margin-bottom: 5px;
+		font-size: 16px;
+		position: static;
+	}
+
+	#main .basicBox .text {
+		margin-bottom: 8px;
+		padding: 10px;
+		position: static;
+		line-height: 1.4;
+	}
+	
+	#main .basicBox .text05 {
+		margin-bottom: 20px;
+	}
+	
+	#main .basicBox .text:before {
+		background: none;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 1000px) {
+	#main .possibleBox .textArea .sp {
+		display: block !important;
+	}
+	
+	#main .possibleBox .photo {
+		margin-bottom: 10px;
+		overflow: hidden;
+	}
+	
+	#main .possibleBox .photo img {
+		margin-left: -80%;
+		width: 180%;
+	}
+	
+	#main .possibleBox .textArea {
+		padding: 0;
+	}
+	
+	#main .possibleBox .textBox {
+		padding-bottom: 20px;
+		width: auto;
+		background: #e2e2e2 none;
+	}
+	
+	#main .possibleBox p {
+		margin: 0 15px 15px;
+		width: auto;
+	}
+}
+
