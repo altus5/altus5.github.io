@@ -6,23 +6,11 @@ date: 2016-11-17 10:00:00 +0900
 ---
 <div id="low_page" class="wrap_all">
   <h1 class="page__title w_const"><span class="en">CONTACT</span><span class="jp">お問い合わせ</span></h1>
-  <section class="page__lead  w_const input_container">
-    <span>お気軽にご質問・お問合せください。</span>
-    <span>弊社担当よりメールおよび電話にてご回答・ご連絡いたします。</span>
-    <span class="aside"><strong>※印は必須項目です。</strong></span>
-  </section>
   <article id="contact" class="article">
     <div class="article__conts w_const">
       <section class="content01 content input_container">
         <form class="form" method="post">
-          <div class="box01">
-            <p>お問い合わせ内容を下記からお選びください。</p>
-            <div class="box01__inr icon_kome">
-              <label><input name="type" type="radio" value="開発依頼">開発依頼</label>
-              <label><input name="type" type="radio" value="見積り依頼">見積り依頼</label>
-              <label><input name="type" type="radio" value="その他">その他</label>
-            </div>
-          </div>
+          <input name="type" type="radio" value="その他" checked style="display: none;" />
 
           <input type="hidden" name="domain" />
           <dl class="cf">
@@ -31,11 +19,11 @@ date: 2016-11-17 10:00:00 +0900
           </dl>
           <dl class="cf">
             <dt><label for="name">お名前</label></dt>
-            <dd class="icon_kome"><input name="name" id="name" type="text" placeholder="(例)有足五郎"></dd>
+            <dd class="icon_kome"><input name="name" id="name" type="text" placeholder="(例)高山 五郎"></dd>
           </dl>
           <dl class="cf">
             <dt><label for="kana">フリガナ</label></dt>
-            <dd class="icon_kome"><input name="kana" id="kana" type="text" placeholder="(例)アルタスゴロウ"></dd>
+            <dd class="icon_kome"><input name="kana" id="kana" type="text" placeholder="(例)タカヤマ ゴロウ"></dd>
           </dl>
           <dl class="cf">
             <dt><label for="tel">電話番号</label></dt>
@@ -76,6 +64,9 @@ date: 2016-11-17 10:00:00 +0900
             </dd>
           </dl>
           <div class="link_next"><button class="btn btn01" type="submit">入力内容を確認する</button></div>
+          <div class="remarks">
+            <span>弊社担当よりメールおよび電話にてご回答・ご連絡いたします。</span>
+          </div>
         </form>
 			</section>
 

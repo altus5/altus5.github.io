@@ -283,11 +283,12 @@ CONTACT
     .icon_kome {
       position: relative;
       &::after {
-        content: "\00203b";
+        //\00203b\005fc5\009808
+        content: "\00203b\005fc5\009808";
         display: block;
         position: absolute;
         top: 10px;
-        left: -20px;
+        left: -60px;
         font-size: 16px;
         color: $base_color01;
       }
@@ -310,7 +311,7 @@ CONTACT
       }
     }
     dl {
-      margin-top: 50px;
+      margin-top: 10px;
       dt {
         float: left;
         width: 250px;
