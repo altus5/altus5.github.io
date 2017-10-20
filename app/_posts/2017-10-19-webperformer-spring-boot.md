@@ -80,14 +80,14 @@ WPでアプリケーションを生成したら、出力されたディレクト
 jarファイル名と、ファイル名にあるバージョン番号を手掛かりに、mvnrepositoryで検索して、pom.xml の dependency に追加します。
 
 ##### 詳細がわからないjarの対応  
-jarファイル名だけでは、バージョン番号がわからないとか、mvnrepositoryで検索しても、見つからない jarがあったりします。もとより面倒ということもあります。  
+jarファイル名だけでは、バージョン番号がわからないとか、mvnrepositoryで検索しても、見つからない jarがあったりします。もとより探すこと自体が面倒でもあります。  
 弊社では、groupIdを独自のものにして、mvnのローカルリポジトリに追加することで対応しました。可能なら、nexusなどのプライベートリポジトリを使った方がよいと思います。  
 例を示します。  
 commons-validator.jarというファイル名だけでは、バージョンがわかりません。ファイルサイズを手掛かりに、mvnrepositoryで検索すると、versionは、1.4であることがわかったのですが、それ自体面倒です。
 * 本来の正しい dependency
 ~~~xml
 <dependency>
-  <groupId>jakarta-regexp</groupId>
+  <groupId>commons-validator</groupId>
   <artifactId>commons-validator</artifactId>
   <version>1.4</version>
 </dependency>
@@ -225,7 +225,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 ~~~
 
 WPが出力したコードの所有権とか著作権は、弊社が保有するものの、WP自体はOSSではないので、
-どこまで、コードを公開してよいのか、判断できないため、一部を抜粋して、掲載しています。
+どこまで、コードを公開してよいのか、判断できないため、一部を抜粋して、問題なさそうな部分のみ掲載しています。
 
 ## まとめ
 
