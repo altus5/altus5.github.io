@@ -59,11 +59,11 @@ https://github.com/msato-ok/trie-master/blob/master/tabletrie.py
 
 この時、共通接頭辞検索のコードは下記のようになります。
 
-<code data-gist-id="codeid1" data-gist-line="71-81"></code>
+<code data-gist-id="291d4a52969470dfa7464faa6175a86b" data-gist-line="71-81"></code>
 
 共通接頭辞検索のアルゴリズムは、入力として‘query’という文字列を取ります。例えば下記のようなものが考えられるでしょう。
 
-<code data-gist-id="codeid1" data-gist-line="85-90"></code>
+<code data-gist-id="291d4a52969470dfa7464faa6175a86b" data-gist-line="85-90"></code>
 
 出力は’query’が表すノード下にある全ての単語です。一例として、下記が正しい出力です。
 
@@ -193,7 +193,7 @@ https://github.com/msato-ok/trie-master/blob/master/double_array_trie.py
 *	入力語彙のうち、「AL」から始まるすべての単語を出力する（共通接頭辞検索）
 *	入力語彙のうち、「ALP」や「ALA」から始まる単語が存在しないことを判定する
 
-<code data-gist-id="codeid1" data-gist-line="104-119"></code>
+<code data-gist-id="16360d36618d3aba3699ca2b81b1318b" data-gist-line="104-119"></code>
 
 ## Trieをシステム開発に応用する
 
