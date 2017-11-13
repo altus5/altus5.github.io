@@ -49,11 +49,11 @@ https://github.com/msato-ok/trie-master/blob/master/tabletrie.py
 
 まず辞書の生成ですが、’MyTrie’というクラスでTrieを表すものとし、’MyTrie’のオブジェクトが一つの辞書を表します。オブジェクトを生成する際には、語彙が格納された配列を入力します。
 
-<code data-gist-id="codeid_1" data-gist-line="41-42"></code>
+<code data-gist-id="291d4a52969470dfa7464faa6175a86b" data-gist-line="41-42"></code>
 
 例えば下記のようにすると、辞書を生成することが出来ます。
 
-<code data-gist-id="codeid_1" data-gist-line="83-85"></code>
+<code data-gist-id="291d4a52969470dfa7464faa6175a86b" data-gist-line="83-85"></code>
 
 テーブルによるTrieの構築について、アイデアは既にご紹介しましたので、その具体的な実装内容はソースコードをご覧ください（’MyTrie’クラスの’init’関数の中身）。
 
