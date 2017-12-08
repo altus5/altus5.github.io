@@ -1,7 +1,7 @@
 ---
 layout: app/_layouts/post.html.ejs
 title:  "TERASOLUNAの開発環境を30分で整備するスターターキット"
-date:   2017-12-08 16:00:00 +0900
+date:   2017-12-07 16:00:00 +0900
 categories: blog spring terasoluna
 description: "Spring Frameworkを中心としたOSSの組み合わせからなる「TERASOLUNA」を採用した開発プロジェクトを、短時間で立ち上げるスターターキットを作成しました。開発チームのメンバーに配布する開発キットから、CI環境の構築までを、わずか、2つのコマンドで一気に構築します。"
 tags:
