@@ -7,6 +7,7 @@ description: "Web Performerで出力されたコードは、Spring 4 に対応�
 tags:
   - "Web Performer"
   - "Spring Boot"
+  - "Spring Framework"
 ---
 
 ## Web Performer とは
