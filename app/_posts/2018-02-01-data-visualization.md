@@ -57,7 +57,7 @@ tags:
 
 今回は、下記のような売上に関する一次元データ（きわめて単純な例）を元に、可視化を進めていきます。
 
-https://github.com/takijuso/R_visualization/blob/master/data/sales.csv
+https://github.com/msato-ok/R_visualization/blob/master/data/sales.csv
 
 ### Tips 1: 「変動の大きさ」を明示してデータを可視化してみよう
 
