@@ -3,7 +3,7 @@ layout: app/_layouts/post.html.ejs
 title:  "Rubyの配列(Array)を魔改造して、連想配列として使ってみた"
 date:   2018-05-07 15:00:00 +0900
 categories: blog data-structure
-description: "連想配列をRubyで実装することを通じ、普段我々が使っている連想配列の性能について理解することを目指した記事です。Rubyの配列(Array)を連想配列に魔改造するための、30行ほどの短いコードを公開しています。"
+description: "連想配列をRubyで実装することを通じ、普段我々が使っている連想配列の性能について理解することを目指した記事です。Rubyの配列(Array)を連想配列に魔改造するための、30行ほどの短いコードをGitHubで公開しています。"
 tags:
   - "データ構造"
   - "実装"
@@ -76,7 +76,6 @@ C++11に `unordered_map` クラスとして連想配列が存在することを�
 まずは、下記ソースコードをご覧ください。
 
 <code data-gist-id="06125dd98ffabb584a20c2ae04aecc3b"></code>
-
 
 上記コードは、RubyのArrayクラス（配列クラス）を継承し、MyAssociativeArrayクラスを生成しています。
 要素取り出し`[]`と代入演算子`[]=`をオーバーロードすることで、
@@ -159,3 +158,7 @@ Rubyでは組み込みクラスのメソッドを上書きできるので（シ�
 では、どうすれば性能の良い連想配列を得られるのでしょう…
 という問いへの答え（の一つ）が、[次回の記事](https://www.altus5.co.jp/blog/data-structure/2018/05/07/hashtable/)でご紹介する「ハッシュテーブル」です。
 ご期待ください！
+
+## 参考資料
+
+* [本記事のソースコード（GitHub）](https://github.com/msato-ok/hash)
