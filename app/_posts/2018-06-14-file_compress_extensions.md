@@ -1,7 +1,7 @@
 ---
 layout: app/_layouts/post.html.ejs
 title:  "zip, compress, gzip, bzip2 - ファイル圧縮の形式に関する覚書"
-date:   2018-05-07 15:00:00 +0900
+date:   2018-06-14 15:00:00 +0900
 categories: blog data-structure file-compress
 description: "ファイルサイズや検索性に大きく影響する「圧縮形式」。本記事ではメジャーな圧縮形式について紹介していくと共に、『高速文字列解析の世界』（岡野原、2012）の内容と連動。エンジニアが処理内容を学習しやすいようまとめています。"
 tags:
