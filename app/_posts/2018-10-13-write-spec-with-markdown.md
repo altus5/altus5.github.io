@@ -2,7 +2,7 @@
 layout: app/_layouts/post.html.ejs
 title:  "仕様書をマークダウンで書きたい"
 date:   2018-10-13 15:00:00 +0900
-categories: blog data-structure full-text-search
+categories: blog document
 description: "プログラミングを開発の中心に据えるなら、仕様書もテキストファイルで書いた方が良い"
 tags:
 - "仕様書"
