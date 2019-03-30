@@ -227,6 +227,7 @@ gulp.task('blog.posts', () => {
     .pipe($.frontMatter())
     .pipe(a5Blog.posts())
     .pipe($.markdown())
+    .pipe(a5Blog.emoji())
     .pipe(a5Blog.ejs(archives))
     .pipe($.htmlPrettify({indent_char: ' ', indent_size: 2}))
     // Output files

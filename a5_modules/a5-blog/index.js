@@ -7,7 +7,7 @@ var frontMatter = require('front-matter');
 var gutil = require('gulp-util');
 var fs = require('fs');
 var ejs = require('ejs');
-var marked = require('marked');
+var emojione = require('emojione');
 var moment = require('moment-timezone');
 var crypto = require('crypto');
 var config = require('../conf');
@@ -105,6 +105,24 @@ module.exports.generateTagPage = function(archiveData) {
     });
 
     cb();
+  });
+}
+
+module.exports.emoji = function(archiveData) {
+  return through.obj(function(file, enc, cb) {
+    if (file.isNull()) {
+      cb(null, file);
+      return;
+    }
+
+    if (file.isStream()) {
+      cb(new gutil.PluginError('a5-blog.post', 'Streaming not supported'));
+      return;
+    }
+
+    file.contents = new Buffer(emojione.shortnameToImage(file.contents.toString()));
+
+    cb(null, file);
   });
 }
 
