@@ -1,7 +1,7 @@
 ---
 layout: app/_layouts/post.html.ejs
-title:  "SPAのエラー処理について考える（設計編）"
-date:   2018-10-13 15:00:00 +0900
+title:  "Angularのエラー処理について考える（設計編）"
+date:   2019-03-30 15:00:00 +0900
 categories: blog angular
 description: "Angularを例にしてSPAでシステムを構築するときに考慮すべきエラー処理について整理してみました"
 tags:
@@ -171,3 +171,7 @@ APIの実行では、2種類のエラーが発生する可能性があります�
 ### 画面固有のエラー処理
 
 エラーの共通仕様としては、定義しないで、画面あるいは、サービスクラスで実装する。
+
+---
+
+[実装編の記事](../../2018/10/13/angular-error-hadling-implement/)も読んでみて下さい。
