@@ -10,7 +10,7 @@ tags:
 - "SPA"
 ---
 
-[前回の記事](../../2018/10/13/angular-error-hadling-design/)では、Angularのエラー処理について設計時の目線で整理しました。  
+[前回の記事](https://www.altus5.co.jp/blog/angular/2019/03/30/angular-error-hadling-design/)では、Angularのエラー処理について設計時の目線で整理しました。  
 今回は、それを実装するときに、どんなことになるのか、実例を添えて説明します。  
 
 ## エラー分類と画面側の実装
