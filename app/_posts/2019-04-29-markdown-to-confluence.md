@@ -88,7 +88,7 @@ Front-matter は、静的Webサイトジェネレータの[jekyll](https://jekyl
 
 ## モヤモヤ解消
 
-以上、開発チーム内では、マークダウンで文書を書いて、gitで管理しつつ、 Confluence でプロジェクト全体の文書共有していて、そこに開発側文書を共有するときに、専用のcliツールを使って公開する方法をご紹介しました。
+以上、 Confluence でプロジェクト全体の文書共有しているんだけど、開発チーム内ではマークダウンで文書を書いて git で管理したいんだけど・・・とモヤモヤしたときには、開発側文書を専用のcliツールで Confluence に共有してみては・・・というお話でした。
 
 実際に、文書を投稿するときの cli は、こんな感じです。
 ```bash
@@ -98,7 +98,7 @@ git commit -m "update hoge"
 git push origin master
 npm run md2c docs/hoge.md  # これが専用cliツール
 ```
-Confluenceの投稿画面を開いて、テキストを貼り付けるっていうモヤモヤが、少しは解消されるんじゃないでしょうか。
+Confluenceの投稿画面を開いて、テキストを貼り付けるっていう気持ち悪さも、少しは解消されるんじゃないでしょうか。
 
 専用cliについては、githubで公開しているので、詳しくは、そちらも参照してみてください。  
 <https://github.com/a5doc/md2confluence>
