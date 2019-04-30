@@ -6,8 +6,8 @@ description: "layout内で置き換え"
 <div id="low_page" class="wrap_all">
   <h1 class="page__title w_const"><span class="en">BLOG</span><span class="jp">"<%= page.title %>" タグの記事です。</span></h1>
   <article id="blog" class="article">
-    <div class="article__conts w_const">
-      <%- include('../../../_includes/archive_index.html.ejs', {
+    <div class="article__conts w_const article__index">
+      <%- include('../../../_includes/archive_index_simple.html.ejs', {
         posts: page.posts
       }); %>
     </div>

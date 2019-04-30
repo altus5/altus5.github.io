@@ -39,4 +39,5 @@ $(function() {
   }
   // 高さ揃え
   $('.relate .post-link').tile(5);
+  $('.article__index .post-link').tile(3);
 });

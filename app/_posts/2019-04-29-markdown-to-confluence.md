@@ -1,6 +1,6 @@
 ---
 layout: app/_layouts/post.html.ejs
-title:  "Github Wiki(マークダウン)とConfluenceのWikiマークアップを同期する"
+title:  "Confluenceのドキュメントをマークダウンで書きたい"
 date:   2019-04-29 10:00:00 +0900
 categories: blog document
 description: "マークダウンで記述したドキュメントを Confluence の wiki マークアップに変換して、且つ、 Confluence API で、ページを post します。"

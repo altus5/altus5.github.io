@@ -10,8 +10,8 @@ description: "アルタスファイブが、どんな会社なのか、ブログ
     <span>求人のご応募、開発のご相談など、お気軽にお問い合わせください。</span>
   </section>
   <article id="blog" class="article">
-    <div class="article__conts w_const">
-      <%- include('../_includes/archive_index.html.ejs', {
+    <div class="article__conts w_const article__index">
+      <%- include('../_includes/archive_index_simple.html.ejs', {
         posts: site.posts
       }); %>
     </div>
