@@ -1,0 +1,630 @@
+<!doctype html><html dir=ltr lang=ja><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=alternate hreflang=ja href=https://www.altus5.co.jp/ ><title>AngularJS vs React それぞれの利点と特徴（React編） | ALTUS-FIVE</title><meta name=description content="「Angular 2」「React」両フレームワークでToDoツールを作成する記事です。実装過程と成果物を比較して、両者のフレームワークの良いところ・悪いところを検証したいと思います。（React編）"><meta name=viewport content="width=device-width,initial-scale=1"><meta property=og:title content="AngularJS vs React それぞれの利点と特徴（React編） | ALTUS-FIVE"><meta property=og:type content=website><meta property=og:url content=https://www.altus5.co.jp><meta property=og:description content="「Angular 2」「React」両フレームワークでToDoツールを作成する記事です。実装過程と成果物を比較して、両者のフレームワークの良いところ・悪いところを検証したいと思います。（React編）"><meta property=og:site_name content=ALTUS-FIVE><meta property=og:image content=https://www.altus5.co.jp/images/ogp.png><meta name=twitter:card content=summary><meta name=twitter:url content=https://www.altus5.co.jp><meta name=twitter:title content="AngularJS vs React それぞれの利点と特徴（React編） | ALTUS-FIVE"><meta name=twitter:description content="「Angular 2」「React」両フレームワークでToDoツールを作成する記事です。実装過程と成果物を比較して、両者のフレームワークの良いところ・悪いところを検証したいと思います。（React編）"><meta name=twitter:image content=https://www.altus5.co.jp/images/ogp.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple_touch_icon180x180.png><link rel=apple-touch-icon sizes=152x152 href=/images/apple_touch_icon152x152.png><link rel=apple-touch-icon sizes=120x120 href=/images/apple_touch_icon120x120.png><link rel=apple-touch-icon sizes=76x76 href=/images/apple_touch_icon76x76.png><link href=https://www.altus5.co.jp/feed.xml rel=alternate type=application/atom+xml><link rel=stylesheet href="/styles/common.css?rev=8b1b5b6baabfd0e227afbbbf65f3f876"><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js></script><script src=/scripts/gist-embed.min.js></script><link rel=stylesheet href="/styles/blog.css?rev=91052963bc4d9e7323a23dd1555b90ac"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/emojione@4.0.0/extras/css/emojione.min.css><body><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5WGNWC" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5WGNWC');</script><!--[if lt IE 9]>
+    <p class="browserupgrade">
+      <strong>古い</strong>ブラウザをご使用されています。
+      本サイトを快適に閲覧頂くために、<a href="http://browsehappy.com/">新しいブラウザにアップグレード</a>してください。
+    </p>
+  <![endif]--><header id=_header><nav class="w_const cf"><h1 class=logo_head><a href=/ ><img src=/images/logo_header.png alt=ALTUS-FIVE（アルタスファイブ）></a></h1><ul class=links><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class="link link_contact"><a href=/contact/ >お問い合わせ</a></ul></nav></header><div id=blog_page class=wrap_all><article id=blog class=article><section class="blog__title w_const"><span>AngularJS vs React それぞれの利点と特徴（React編）</span></section><div class="article__conts w_const cf"><div id=blog-content><div id=blog-subtitle class=cf><div id=blog-date>2017/02/24</div><div id=blog-tags><ul class=tag-uline><li class="tag-uline-label tag__0"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%8A%80%E8%A1%93%E7%B7%8F%E8%A6%A7/ >プログラミング技術総覧</a><li class="tag-uline-label tag__7"><a href=/blog/tag/AngularJS/ >AngularJS</a><li class="tag-uline-label tag__8"><a href=/blog/tag/React/ >React</a></ul></div></div><div class=markdown-body><p>「AngularJS vs React」<a href=https://www.altus5.co.jp/blog/angularjs/react/2017/01/30/angularjs-vs-react/ >前回のAngular編</a>では、Angular 2でToDoツールを作成していきました。今回は、Reactを用いて同様の機能を持ったToDoツールを作成することで、両者の特徴を明確にしたいと思います。<h2 id=react->Reactの特徴</h2><h3 id=-reactive-programming->リアクティブプログラミング(Reactive programming)を志向</h3><p>リアクティブプログラミングを志向していることが、Reactという名前の所以です。 リアクティブプログラミングについては、過去記事で解説していますので、ご参照ください。<p><a href=https://www.altus5.co.jp/blog/reactive-programming/2016/11/17/reactive-programming/ >リアクティブプログラミングの概観と、各言語での実装について</a><h3 id=jsx-dom-virtual-dom->JSXによる、仮想DOM(Virtual DOM)を用いた実装</h3><p>最近のフロントフレームワークの多くでは、仮想DOMという技術が取り入れられ、主流になりつつあります。その仮想DOMを定着させたのがReactです。<p>Reactでは「コンポーネント」を生成し、UIを構築します。コンポーネントはインスタンス化して使用します。このコンポーネントのインスタンスのことをエレメントと呼びます。<pre><code>var Hello = React.createClass({
+  render() {
+    return (
+      &lt;div&gt;&lt;span&gt;hello&lt;/span&gt;&lt;/div&gt;
+    )
+  }
+})
+</code></pre><p>上記のコード中に、HTMLタグとしておなじみの<code>&lt;div&gt;</code>が入っていると思います。これは、実はReactで定義されているコンポーネントです。このHTMLタグ（のようなもの）をJSXと呼びます。 一般に、 <code>&lt;div&gt;</code>などをDOM(Document Object Model)と総称しますよね。このことから、JSXは仮想DOMと呼ばれる概念に属します。<h3 id=flux->Fluxによる実装</h3><p>Fluxというアーキテクチャを理解しないとReactの良さを最大限に引き出すことができません。簡単に概要を記載します。<ul><li>クライアントサイドの設計パターン<li>React同様、Facebookにより開発された<li>データの流れが常に一方通行（MVCとは対極にある）<li>オブザーバーパターンが根幹にある<li>Action, View, Dispatcher, Storeという4部品に別れている</ul><h4 id=flux-observer-pattern->Fluxはオブザーバーパターン(Observer pattern)を実現</h4><p>オブザーバーパターンはデザインパターンの一つです。Observerとは観察者という意味の単語で、ここではオブジェクト自身が観察者に通知する仕組みのことを端的に表しています。 オブザーバーパターンについては、下記記事でより詳しく説明を行っています。<p><a href=https://www.altus5.co.jp/blog/reactive-programming/2016/11/17/reactive-programming/ >・リアクティブプログラミングの概観と、各言語での実装について</a><h4 id=flux->Fluxではデータの流れが常に一方通行</h4><p><img src=/images/blog/react-vs-angularjs/mvc.jpg alt=(図1)><p>MVCモデルですと、データはControllerからModel、ModelからView、ModelからControllerというように、自由に行き交います。 そのためプロジェクトが大きくなっていくにつれて、ソースを追うのが大変になっていきます。<p><img src=/images/blog/react-vs-angularjs/flux.jpg alt=(図2)><p>しかし、Fluxを使用した場合のデータは常に一方通行になるため、大型のプロジェクトでも管理しやすく、チーム開発も円滑になります。<h4 id=flux->Fluxの部品</h4><p>Fluxの各部品の概要を記載します。Reactはこの中のViewを担当します。<ul><li>Action<ul><li>UIをクリックしたり、HTTPリクエストが届いたときなどの非同期イベントが発生すると呼ばれる<li>各イベントの動作を決定<ul><li>Storeにそれをメッセージとして伝える</ul></ul><li>Dispatcher<ul><li>ActionからStoreへいくための橋渡し<li>facebook/fluxはこの機能のみを提供している</ul><li>Store<ul><li>データをためる場所<li>MVCでいうならModel的な役割</ul><li>View<ul><li>今回はReact<li>他のフレームワークでも代用可能</ul></ul><p>また今回はFluxとReactの概要を知るために、まずはfacebook/fluxを使用してみます。facebook/fluxは、名前の通りFacebook, Inc.が開発しており、今回は以下のメリットから導入しています。<p>軽量な設計のため、必然的に自分でコードを書く部分が多くなる<br>よって、Fluxを学ぶのに適している<br>導入が簡単<p>Fluxをサポートするフレームワークは他にもいくつかあり、有名どころではReduxなどがあります。<h2 id=react-todo->ReactでToDoツールを実装する</h2><p>ReactはフルスタックフレームワークであるAngular 2とはまったく異なり、MVC(Model-View-Controller)のViewのみを担当します。<p>今回作成するToDoツールの最終的なディレクトリ構造は以下のようになります。<pre><code>├── index.html
+├── package.json
+├── src
+│   ├── containers
+│   │   └── AppContainer.js
+│   ├── data
+│   │   ├── Counter.js
+│   │   ├── Todo.js
+│   │   ├── TodoActionTypes.js
+│   │   ├── TodoActions.js
+│   │   ├── TodoDispatcher.js
+│   │   ├── TodoDraftStore.js
+│   │   └── TodoStore.js
+│   ├── root.js
+│   └── views
+│       └── AppView.js
+└── webpack.config.js
+</code></pre><p>src以下にアプリケーションのソースコードを配置していきます。<h3 id=->インストール</h3><p>以下のpackage.jsonを用意します。今回はwebpackとBabelを使用して作業を進めていきます。<p>package.json<pre><code>{
+  &quot;name&quot;: &quot;flux todo&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;repository&quot;: &quot;&quot;,
+  &quot;author&quot;: &quot;xxxxx&quot;,
+  &quot;main&quot;: &quot;bundle.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;webpack ./src/root.js ./bundle.js&quot;,
+    &quot;watch&quot;: &quot;webpack ./src/root.js ./bundle.js --watch&quot;,
+  },
+  &quot;dependencies&quot;: {
+    &quot;classnames&quot;: &quot;^2.2.3&quot;,
+    &quot;flux&quot;: &quot;3.1.2&quot;,
+    &quot;immutable&quot;: &quot;^3.8.0&quot;,
+    &quot;react&quot;: &quot;^15.0.2&quot;,
+    &quot;react-dom&quot;: &quot;^15.0.1&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;babel-core&quot;: &quot;^6.7.6&quot;,
+    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,
+    &quot;babel-plugin-syntax-async-functions&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-syntax-flow&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-syntax-jsx&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-syntax-object-rest-spread&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-syntax-trailing-function-commas&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-transform-flow-strip-types&quot;: &quot;^6.5.0&quot;,
+    &quot;babel-plugin-transform-object-rest-spread&quot;: &quot;^6.6.5&quot;,
+    &quot;babel-plugin-transform-react-jsx&quot;: &quot;^6.7.5&quot;,
+    &quot;babel-plugin-transform-regenerator&quot;: &quot;^6.5.2&quot;,
+    &quot;babel-plugin-transform-runtime&quot;: &quot;^6.5.2&quot;,
+    &quot;babel-preset-es2015&quot;: &quot;^6.5.0&quot;,
+    &quot;webpack&quot;: &quot;^1.13.0&quot;
+  }
+}
+</code></pre><p>以下コマンドでインストールします。<pre><code>$ npm install
+</code></pre><p>ビルドするときは以下コマンドで実行します。<pre><code>$ npm build
+</code></pre><h3 id=-index-html->インデックスファイルの作成(index.html)</h3><p>初めはindex.htmlを作成します。webpackを使用してビルドしており、<code>bundle.js</code>が最終的に作成されます。index.html内ではそれを読み込んでいます。<p>index.html<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;section id=&quot;todoapp&quot;&gt;&lt;/section&gt;
+    &lt;script src=&quot;./bundle.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Reactが関連している記述は<code>section</code>というタグです。<pre><code>&lt;section id=&quot;todoapp&quot;&gt;&lt;/section&gt;
+</code></pre><p>最終的に<code>id=todoapp</code>内にReactで設定した内容を表示します。ReactではJSXを使用するため、HTMLライクなコードをシンプルに書くことができます。JSXについては冒頭でも説明しましたが、後ほどまた登場します。<h3 id=-js-src-root-js->一番最初に読み込まれるjsファイルの作成(src/root.js)</h3><p>package.jsonに、buildコマンドとして<code>webpack ./src/root.js ./bundle.js</code>と指定しています。そのためsrc/root.jsが最初に読み込まれるようになっています。<p>src/root.js<pre><code>import AppContainer from &#39;./containers/AppContainer&#39;;
+import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+
+ReactDOM.render(&lt;AppContainer /&gt;, document.getElementById(&#39;todoapp&#39;));
+</code></pre><p>ブラウザに表示するためには、<code>ReactDOM</code>を使用します。HTMLのIDを取得して、見つかったタグ内に表示させます。<p>また、<code>ReactDOM.render</code>の第一引数に<code>&lt;AppContainer /&gt;</code>という見慣れないタグを指定していますね。 これは自作のコンポーネントである <code>src/containers/AppContainer.js</code>の中身をrenderメソッドで表示するためのものです。<h3 id=container-src-containers-appcontainer-js->Containerの作成(/src/containers/AppContainer.js)</h3><p>Store、Action、ViewなどをまとめるContainerを作成します。<p>/src/containers/AppContainer.js<pre><code>import AppView from &#39;../views/AppView&#39;;
+import {Container} from &#39;flux/utils&#39;;
+import TodoStore from &#39;../data/TodoStore&#39;;
+import TodoDraftStore from &#39;../data/TodoDraftStore&#39;;
+import TodoActions from &#39;../data/TodoActions&#39;;
+
+function getStores() {
+  return [
+    TodoStore,
+    TodoDraftStore,
+  ];
+}
+
+function getState() {
+  return {
+    todos: TodoStore.getState(),
+    draft: TodoDraftStore.getState(),
+
+    onAdd: TodoActions.addTodo,
+    onDeleteTodo: TodoActions.deleteTodo,
+    onToggleTodo: TodoActions.toggleTodo,
+    onUpdateDraft: TodoActions.updateDraft,
+  };
+}
+
+export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p>facebook/fluxにはFlux Utilsというライブラリがあります。今回はContainerというReact Componentのラッパーを使用しています。<pre><code>import {Container} from &#39;flux/utils&#39;;
+,
+,
+,
+export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p>ContainerはStore(MVCにおけるModel的な役割を果たす部品)からデータを受け取ります。そのデータが更新されていればContainer配下のComponentに通知し、Componentは更新後のデータを反映して再描画します。 この設計により、データ変更の監視機能を、自分で実装する必要がなくなります。<pre><code>function getStores() {
+  return [
+    TodoStore,
+    TodoDraftStore,
+  ];
+}
+
+function getState() {
+  return {
+    todos: TodoStore.getState(),
+    draft: TodoDraftStore.getState(),
+
+    onAdd: TodoActions.addTodo,
+    onDeleteTodo: TodoActions.deleteTodo,
+    onToggleTodo: TodoActions.toggleTodo,
+    onUpdateDraft: TodoActions.updateDraft,
+  };
+}
+
+export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p><code>getStores()</code>関数にContainerと連携するStoreを定義します。そして<code>getState()</code>に変更を検知したときに実行されるActionを定義していきます。<h3 id=action-src-data-todoactions-js->Actionの作成（src/data/TodoActions.js）</h3><ul><li>Action<ul><li>UIをクリックしたり、HTTPリクエストが届いたときなどの非同期イベントが発生すると呼ばれる<li>各イベントの動作を決定<ul><li>Storeにそれをメッセージとして伝える</ul></ul></ul><pre><code>import TodoActionTypes from &#39;./TodoActionTypes&#39;;
+import TodoDispatcher from &#39;./TodoDispatcher&#39;;
+
+const Actions = {
+  addTodo(text) {
+    TodoDispatcher.dispatch({
+      type: TodoActionTypes.ADD_TODO,
+      text,
+    });
+  },
+
+  deleteTodo(id) {
+    TodoDispatcher.dispatch({
+      type: TodoActionTypes.DELETE_TODO,
+      id,
+    });
+  },
+
+  toggleTodo(id) {
+    TodoDispatcher.dispatch({
+      type: TodoActionTypes.TOGGLE_TODO,
+      id,
+    });
+  },
+
+  updateDraft(text) {
+    TodoDispatcher.dispatch({
+      type: TodoActionTypes.UPDATE_DRAFT,
+      text,
+    });
+  },
+};
+
+export default Actions;
+</code></pre><p>ActionではStoreにデータを送るための処理を記述していきます。ActionはあくまでStoreにデータを送るだけなので、ロジックはStoreに委譲します。 またDispacher部分が今回facebook/fluxに処理を任せている部分になります。<pre><code>addTodo(text) {
+ TodoDispatcher.dispatch({
+   type: TodoActionTypes.ADD_TODO,
+   text,
+ });
+},
+</code></pre><p>ActionではStoreに渡すべきtypeと、引数であるstateを渡します。各タイプについては、<code>src/data/TodoActionTypes.js</code>にenumのように定義しておくと、どのようなActionかが一目でわかり、管理しやすくなります。<p>src/data/TodoActionTypes.js<pre><code>const ActionTypes = {
+  ADD_TODO: &#39;ADD_TODO&#39;,
+  DELETE_TODO: &#39;DELETE_TODO&#39;,
+  TOGGLE_TODO: &#39;TOGGLE_TODO&#39;,
+  UPDATE_DRAFT: &#39;UPDATE_DRAFT&#39;,
+};
+
+export default ActionTypes;
+</code></pre><h3 id=store-src-data-todostore-js->Storeの作成(src/data/TodoStore.js)</h3><ul><li>Store<ul><li>データをためる場所<li>MVCでいうならModel的な役割</ul></ul><p>src/data/TodoStore.js<pre><code>import Counter from &#39;./Counter&#39;;
+import Immutable from &#39;immutable&#39;;
+import {ReduceStore} from &#39;flux/utils&#39;;
+import Todo from &#39;./Todo&#39;;
+import TodoActionTypes from &#39;./TodoActionTypes&#39;;
+import TodoDispatcher from &#39;./TodoDispatcher&#39;;
+
+class TodoStore extends ReduceStore {
+  constructor() {
+    super(TodoDispatcher);
+  }
+
+  getInitialState() {
+    return Immutable.OrderedMap();
+  }
+
+  reduce(state, action) {
+    switch (action.type) {
+      case TodoActionTypes.ADD_TODO:
+        // Don&#39;t add todos with no text.
+        if (!action.text) {
+          return state;
+        }
+        const id = Counter.increment();
+        return state.set(id, new Todo({
+          id,
+          text: action.text,
+          complete: false,
+        }));
+
+      case TodoActionTypes.DELETE_TODO:
+        return state.delete(action.id);
+
+      case TodoActionTypes.TOGGLE_TODO:
+        return state.update(
+          action.id,
+          todo =&gt; todo.set(&#39;complete&#39;, !todo.complete),
+        );
+
+      default:
+        return state;
+    }
+  }
+}
+
+
+export default new TodoStore();
+</code></pre><p>タスクのリストを管理するTodoStore.jsです。タスク一つひとつに関しては、<code>TodoDraftStore.js</code>で管理します。<pre><code>  reduce(state, action) {
+    switch (action.type) {
+      case TodoActionTypes.ADD_TODO:
+        ,,,
+      case TodoActionTypes.DELETE_TODO:
+        ,,,
+      case TodoActionTypes.TOGGLE_TODO:
+        ,,,
+      default:
+        return state;
+    }
+  }
+</code></pre><p>先ほどのActionで指定していたtypeなどはStore内のreduceメソッドで受取ます。switch文で分岐して各実装を定義していきます。<h4 id=reducestore->ReduceStoreクラスの継承</h4><p>Storeクラスを作る際に<code>ReduceStore</code>というクラスを継承しています。<pre><code>class TodoStore extends ReduceStore {
+</code></pre><p>ReduceStoreは、facebook/flux 2.1.0から加わった、Flux Utilsに含まれるライブラリの一つです。 ReduceStoreは、自身の状態の変更をContainerに自動で反映することができます。 （2.1.0以前はevent emitterを使用して、プログラマが自分で通知のソースコードを書いていました）<p>src/data/TodoActions.js<pre><code>export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p>先ほどTodoActions.jsで関連付けしているので、これで変更の通知機能をFluxに任せることができます。<h3 id=src-data-tododispatcher-js>src/data/TodoDispatcher.js</h3><ul><li>Dispatcher<ul><li>ActionからStoreへいくための橋渡し<li>facebook/fluxはこの機能のみ提供している</ul></ul><p>src/data/TodoDispatcher.js<pre><code>import {Dispatcher} from &#39;flux&#39;;
+
+export default new Dispatcher();
+</code></pre><p>facebook/fluxを読み込んでいるだけです。このクラスにDispacher部分の処理を丸投げします。<h3 id=-src-data-tododraftstore-js->ユーザが入力中かどうかの判定（src/data/TodoDraftStore.js）</h3><p>入力中のToDoを管理するTodoDraftStore.jsについても見ていきます。<pre><code>import {ReduceStore} from &#39;flux/utils&#39;;
+import TodoActionTypes from &#39;./TodoActionTypes&#39;;
+import TodoDispatcher from &#39;./TodoDispatcher&#39;;
+
+class TodoDraftStore extends ReduceStore {
+  constructor() {
+    super(TodoDispatcher);
+  }
+
+  getInitialState() {
+    return &#39;&#39;;
+  }
+
+  reduce(state, action) {
+    switch (action.type) {
+      case TodoActionTypes.ADD_TODO:
+        return &#39;&#39;;
+
+      case TodoActionTypes.UPDATE_DRAFT:
+        return action.text;
+
+      default:
+        return state;
+    }
+  }
+}
+
+export default new TodoDraftStore();
+</code></pre><p><code>src/data/TodoStore.js</code>とほぼ同じ作りになっています。こちらもReduceStoreを継承して実装します。 Actionを作成し、Dispatcherが用意できれば同じようなStoreは簡単に作成することができます。<h3 id=todo-src-data-todo-js->ToDoオブジェクトの作成(src/data/Todo.js)</h3><p>ToDoリストそのものを表すオブジェクトを作成します。属性を定義したクラスを用意するだけです。<p>src/data/Todo.js<pre><code>import Immutable from &#39;immutable&#39;;
+
+const Todo = Immutable.Record({
+  id: &#39;&#39;,
+  complete: false,
+  text: &#39;&#39;,
+});
+
+export default Todo;
+</code></pre><p>今回は、Reactと直接の関連はありませんが、immutable.jsを使用しています。<p>immutable.jsはFacebook, Inc.が開発したJavaScriptのライブラリで、immutableなコレクションを提供してくれます(listやmapを簡単に扱えることが利点）。 <code>Immutable.Record</code>を使用すると、JavaScriptでimmutableなクラスが作成できます。<h3 id=view-src-views-appview-js->Viewの作成(src/views/AppView.js)</h3><ul><li>View<ul><li>主にreactがviewの役目になる<li>他のフレームワークでも代用可能</ul></ul><pre><code>import React from &#39;react&#39;;
+
+function AppView(props) {
+  return (
+    &lt;div&gt;
+      &lt;Header {...props} /&gt;
+      &lt;Main {...props} /&gt;
+      &lt;Footer {...props} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+const ENTER_KEY_CODE = 13;
+function Header(props) {
+
+  const addTodo = () =&gt; props.onAdd(props.draft);
+  const onKeyDown = (event) =&gt; {
+    if (event.keyCode === ENTER_KEY_CODE) {
+      props.onAdd(props.draft);
+    }
+  }
+  const onChange = (event) =&gt; props.onUpdateDraft(event.target.value);
+  return (
+    &lt;header id=&quot;header&quot;&gt;
+      &lt;h1&gt;todos&lt;/h1&gt;
+      &lt;input
+        id=&quot;new-todo&quot;
+        placeholder=&quot;What needs to be done?&quot;
+        value={props.draft}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+      /&gt;
+    &lt;/header&gt;
+  );
+}
+
+function Main(props) {
+  if (props.todos.size === 0) {
+    return null;
+  }
+  return (
+    &lt;section id=&quot;main&quot;&gt;
+      &lt;ul id=&quot;todo-list&quot;&gt;
+        {[...props.todos.values()].reverse().map(todo =&gt; (
+          &lt;li key={todo.id}&gt;
+            &lt;div className=&quot;view&quot;&gt;
+              &lt;input
+                className=&quot;toggle&quot;
+                type=&quot;checkbox&quot;
+                checked={todo.complete}
+                onChange={() =&gt; props.onToggleTodo(todo.id)}
+              /&gt;
+              &lt;label&gt;{todo.text}&lt;/label&gt;
+              &lt;button
+                className=&quot;destroy&quot;
+                onClick={() =&gt; props.onDeleteTodo(todo.id)}
+              &gt;削除&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  );
+}
+
+function Footer(props) {
+  if (props.todos.size === 0) {
+    return null;
+  }
+
+  const remaining = props.todos.filter(todo =&gt; !todo.complete).size;
+  const phrase = remaining === 1 ? &#39; item left&#39; : &#39; items left&#39;;
+
+  return (
+    &lt;footer id=&quot;footer&quot;&gt;
+      &lt;span id=&quot;todo-count&quot;&gt;
+        &lt;strong&gt;
+          {remaining}
+        &lt;/strong&gt;
+        {phrase}
+      &lt;/span&gt;
+    &lt;/footer&gt;
+  );
+}
+
+export default AppView;
+</code></pre><p>最後にReactのViewの部分について解説します。少し長くなりますが、段階に分けて説明します。<h4 id=appview->AppView関数</h4><pre><code>function AppView(props) {
+  return (
+    &lt;div&gt;
+      &lt;Header {...props} /&gt;
+      &lt;Main {...props} /&gt;
+      &lt;Footer {...props} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>コンポーネントを読み込んでいる部分です。各コンポーネントにはpropsという引数を与えています。<h5 id=props-state>propsとstate</h5><p>Reactにはデータを管理する変数が2つあり、非常に混乱しやすいです。ほとんど同じように利用できるのですが、これらには明確な使い分けがあります。<ul><li>props<ul><li>親コンポーネントから渡されたプロパティ<li>propsはimmutableであるべき</ul><li>state<ul><li>そのコンポーネントが持っているプロパティ<ul><li>コンポーネントからコンポーネントへは渡されない</ul><li>stateは可変であるべき</ul></ul><p>src/containers/AppContainer.js<pre><code>export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p>こちらで定義された<code>AppView</code>は、<code>AppContainer</code>内でStore(getStores)やAction(getState)などと一緒に登録されています。こうすることによって、Store内のプロパティがpropsで受け取れるようになっています。<p>なので、今回の<code>AppContainer.js</code>で定義されたpropsの場合は以下のように値やメソッドが使用できます。<pre><code>props.todos
+
+props.onAdd(props.draft);
+</code></pre><h5 id=-props-spread-attributes->...props (Spread Attributes)</h5><p>このドットが続く記法を使用すると、変数の中身を展開して引数としてそのまま渡すことができます。これはSpread AttributesというJSXの記法です。<pre><code>const props = { foo: &quot;foo&quot;, bar: &quot;bar&quot; };
+
+// 通常通りの記法
+return &lt;Child foo={props.foo} bar={props.bar} /&gt;
+// Spread Attributesを使用
+return &lt;Child {...props} /&gt;
+</code></pre><h4 id=-header->タスクを登録するテキストフォーム(Header)の作成</h4><p>タスクを登録するフォームのコンポーネントを作成します。<pre><code>const ENTER_KEY_CODE = 13;
+function Header(props) {
+
+  const addTodo = () =&gt; props.onAdd(props.draft);
+  const onKeyDown = (event) =&gt; {
+    if (event.keyCode === ENTER_KEY_CODE) {
+      props.onAdd(props.draft);
+    }
+  }
+  const onChange = (event) =&gt; props.onUpdateDraft(event.target.value);
+  return (
+    &lt;header id=&quot;header&quot;&gt;
+      &lt;h1&gt;todos&lt;/h1&gt;
+      &lt;input
+        id=&quot;new-todo&quot;
+        placeholder=&quot;What needs to be done?&quot;
+        value={props.draft}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+      /&gt;
+    &lt;/header&gt;
+  );
+}
+</code></pre><p>AppViewsからStoreのpropsが渡されています。propsにはコンテナで登録したStoreのプロパティやメソッドを使用したり、値を取得できたります。<pre><code>return (
+    &lt;header id=&quot;header&quot;&gt;
+      &lt;h1&gt;todos&lt;/h1&gt;
+      &lt;input
+        id=&quot;new-todo&quot;
+        placeholder=&quot;What needs to be done?&quot;
+        value={props.draft}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+      /&gt;
+    &lt;/header&gt;
+);
+</code></pre><p>冒頭でも説明しましたが、これがJSXです。一見するとHTMLタグのようですが、すべてJSXの記法です。 またコンポーネントは必ず一つのJSXを返すことがルールになっています。<p>JSXこそがReactの最大の特徴といっても過言ではありません。javascriptとHTML(擬似)を分離せずに記述できるようになっています。そうすることによって、jQueryなどによるDOM操作の煩わしさを排除することができます。<pre><code>const onChange = (event) =&gt; props.onUpdateDraft(event.target.value);
+</code></pre><p><code>onChange</code>などのイベントはpropsから取得しており、名前をつけてイベントとして渡しているだけになります。 View内にロジックを書く必要がなく、領分がはっきりと分かれているのがわかると思います。<pre><code>const addTodo = () =&gt; props.onAdd(props.draft);
+
+const onKeyDown = (event) =&gt; {
+if (event.keyCode === ENTER_KEY_CODE) {
+    props.onAdd(props.draft);
+  }
+}
+
+const onChange = (event) =&gt; props.onUpdateDraft(event.target.value);
+</code></pre><p>タスクの登録はheaderコンポーネントで行います。ここで入力中のToDoを管理するTodoDraftStore(props.draft)が使用されています。<p>src/data/TodoStore.js<pre><code>return state.set(id, new Todo({
+  id,
+  text: action.text,
+  complete: false,
+}));
+</code></pre><p><code>props.onAdd</code>のロジックは<code>src/data/TodoStore.js</code>に記載されています。<code>props.draft</code>で入力中であったFormの文章をStateに登録しています。 先ほど記述したように <code>state</code>の値は可変です。stateの値は即座にViewに反映されるので、画面に追加されたToDoが表示されます。<h4 id=-main->タスクの一覧を表示するパーツ(Main)の作成</h4><p>Main関数は、タスクを一覧表示するリスト機能を担います。<pre><code>function Main(props) {
+  if (props.todos.size === 0) {
+    return null;
+  }
+  return (
+    &lt;section id=&quot;main&quot;&gt;
+      &lt;ul id=&quot;todo-list&quot;&gt;
+        {[...props.todos.values()].reverse().map(todo =&gt; (
+          &lt;li key={todo.id}&gt;
+            &lt;div className=&quot;view&quot;&gt;
+              &lt;input
+                className=&quot;toggle&quot;
+                type=&quot;checkbox&quot;
+                checked={todo.complete}
+                onChange={() =&gt; props.onToggleTodo(todo.id)}
+              /&gt;
+              &lt;label&gt;{todo.text}&lt;/label&gt;
+              &lt;button
+                className=&quot;destroy&quot;
+                onClick={() =&gt; props.onDeleteTodo(todo.id)}
+              &gt;削除&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre><p>JSXで一つ注意しなければならないのは、タグに<code>class=</code>が使用できない点です。これはJSXでは<code>className=</code>と書かなければなりません。なぜならclassはJavaScriptの予約語であるためです。<pre><code>{[...props.todos.values()].reverse().map(todo =&gt;
+</code></pre><p><code>props.todos</code>でループで回したあとは、<code>todo.id</code>や<code>todo.text</code>のように自然に値を取り出すことができます。<h4 id=-footer->未完了タスクの総数を表示するパーツ(Footer)の作成</h4><p>Footer関数は、未完了タスクの総数を表示するといった機能を担います。<pre><code>function Footer(props) {
+  if (props.todos.size === 0) {
+    return null;
+  }
+
+  const remaining = props.todos.filter(todo =&gt; !todo.complete).size;
+  const phrase = remaining === 1 ? &#39; item left&#39; : &#39; items left&#39;;
+
+  return (
+    &lt;footer id=&quot;footer&quot;&gt;
+      &lt;span id=&quot;todo-count&quot;&gt;
+        &lt;strong&gt;
+          {remaining}
+        &lt;/strong&gt;
+        {phrase}
+      &lt;/span&gt;
+    &lt;/footer&gt;
+  );
+}
+
+</code></pre><p>こちらは特に迷うようなところはないでしょう。propsからtodosを取得して、計数して表示させているだけです。<h4 id=-appview>再びAppView</h4><pre><code>function AppView(props) {
+  return (
+    &lt;div&gt;
+      &lt;Header {...props} /&gt;
+      &lt;Main {...props} /&gt;
+      &lt;Footer {...props} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>そして一番上のAppViewに戻ってみると、すべてのコンポーネントをJSXで記載してreturnしていることがわかると思います。<pre><code>export default Container.createFunctional(AppView, getStores, getState);
+</code></pre><p>あとは<code>src/containers/AppContainer.js</code>でコンテナに登録し、<p>src/root.js<pre><code>import AppContainer from &#39;./containers/AppContainer&#39;;
+import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+
+ReactDOM.render(&lt;AppContainer /&gt;, document.getElementById(&#39;todoapp&#39;));
+</code></pre><p>root.jsにReactDOM.renderを定義します。<pre><code>&lt;section id=&quot;todoapp&quot;&gt;&lt;/section&gt;
+</code></pre><p>そしてHTMLタグに表示させるように、<code>id=todoapp</code>を設置すれば完了です。<h3 id=react->Reactについてのまとめ</h3><ul><li>JSXが使用できるので、DOM操作で混乱することが少ない<li>値を変更したときの監視はFluxなどに任せることができるのでコード量が少ない<li>Action→Dispatcher→Store→Viewとデータの流れが決まっているので、あとでソースを読んだときにわかりやすい<li>Fluxのフレームワークの種類も豊富なので、違うものを使用すればもっと楽に開発できる</ul><h2 id=angularjs-react->AngularJSとReact、それぞれの比較</h2><h3 id=->コンポーネント指向フレームワークとしての差異</h3><p>Angularは、Angular 2以降コンポーネント指向になりました。このことにより、どちらも基本的にはコンポーネントごとにパーツを作るようになりました。<h4 id=angular-2>Angular 2</h4><p>Angular 2は@NgModule内でコンポーネントを定義しています。<p>app/app.module.ts<pre><code>declarations: [
+    AppComponent,
+    TodoHeaderComponent,
+    TodoContentComponent,
+    TodoFooterComponent,
+],
+</code></pre><h4 id=react>React</h4><p>ReactはAppViewでコンポーネントを定義しています。<p>src/views/AppView.js<pre><code>function AppView(props) {
+  return (
+    &lt;div&gt;
+      &lt;Header {...props} /&gt;
+      &lt;Main {...props} /&gt;
+      &lt;Footer {...props} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>Angularがコンポーネント志向を採用したことで、Angular 1のときよりは差が縮まったと思います。ただ設計が同じでもReactはJSXを使用しているため、やはり記法に大きな違いがあります。<h3 id=flux-react-angular-2>Flux上のReact、フルスタックフレームワークのAngular 2</h3><p>ReactはFluxと密接な関係にあるため、アーキテクチャに関する学習コストがかかります。一方、あくまでViewのためのフレームワークですので、小規模な導入も可能です。 Reactと併用できるFluxのフレームワークは多数あり、組み合わせによってはまったく違う開発が出来そうです。そのことから、適材を選びやすいという印象を受けました。<p>一方でAngular 2はフルスタックフレームワークです。途中からライブラリを変更するなどは難しいと思います。Angular2を選んだ場合は、もしも他のAltJsを使用したいと思っても、TypeScriptと密接に関連性があるため変更は容易ではありません。また、ルーティング機能などのライブラリもAngular2に含まれているため、使いづらい部分があってもバージョンアップを待つか、自分で独自に拡張するしかありません。他のライブラリへの移行は難しいと思います。そういったことから、部分的に導入できるReactに対して、Angularは最初から全てを学ばないといけないのが難点だなと感じました。<p>ただ、一度身につけてしまえばAngularの方が楽なのかなと思いました。ReactはFlux, ReactRouter, JSX/ES2015など周辺ツールが多いので、取捨選択が大変です。<h3 id=view->Viewの差異</h3><h4 id=react-view>ReactのView</h4><p>今回のコードでは、<code>src/views/AppView.js</code>内のHeaderコンポーネントに記載されています。<p>src/views/AppView.js<pre><code>const ENTER_KEY_CODE = 13;
+function Header(props) {
+
+  const addTodo = () =&gt; props.onAdd(props.draft);
+  const onKeyDown = (event) =&gt; {
+    if (event.keyCode === ENTER_KEY_CODE) {
+      props.onAdd(props.draft);
+    }
+  }
+  const onChange = (event) =&gt; props.onUpdateDraft(event.target.value);
+  return (
+    &lt;header id=&quot;header&quot;&gt;
+      &lt;h1&gt;todos&lt;/h1&gt;
+      &lt;input
+        id=&quot;new-todo&quot;
+        placeholder=&quot;What needs to be done?&quot;
+        value={props.draft}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+      /&gt;
+    &lt;/header&gt;
+  );
+}
+</code></pre><h4 id=angular2-view>Angular2のView</h4><p>Angular 2がHTMLファイルに記載するのに対し、ReactはJSXを使用しているので、この点が大きく違います。<p>app/components/header/header.component.ts<pre><code>import {Component} from &#39;@angular/core&#39;;
+import {TodoService} from &#39;../../services/todo.service&#39;;
+
+@Component({
+  selector: &#39;todo-header&#39;,
+  templateUrl: &#39;app/components/header/header.html&#39;
+})
+
+export class TodoHeaderComponent {
+
+  title:string;
+
+  constructor(private service:TodoService) {}
+  addTodo() {
+    if (this.title != null &amp;&amp; this.title.trim().length) {
+      this.service.add(this.title);
+      this.title = null;
+    }
+  }
+}
+</code></pre><p>header.html<pre><code>&lt;header class=&quot;well&quot;&gt;
+  &lt;h1&gt;Todos&lt;/h1&gt;
+  &lt;form class=&quot;form-inline&quot;&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label&gt;新しいTodo：&lt;/label&gt;
+      &lt;input class=&quot;form-control&quot; name=&quot;title&quot; [(ngModel)]=&quot;title&quot;&gt;
+    &lt;/div&gt;
+    &lt;button class=&quot;btn btn-primary&quot; (click)=&quot;addTodo()&quot;&gt;追加&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/header&gt;
+</code></pre><p>JSXのもっとも良い点は、めちゃくちゃになりがちなjQueryなどのDOM操作を一掃できるところだと思います。JSXに置き換えることよって、JSと連動したタグはすべて管理できますし、ReactのViewを見ればタグの仕様はすべてわかります。<p>ただし、デザイナーやエンジニア（コーダーなど）とJSXの知識を共有しておかなければなりません。自分一人しか知識を持っていない状態では作業しづらいのが難点です。<p>Angular 2の場合は、従来のようなテンプレート方式を採用しているので、<ol><li>デザイナーがデザインを作成する<li>コーダーがHTMLコードを書く<li>フロントエンジニアがAngularのコードを書く</ol><p>という流れがやりやすいと思いました。<p>最後に、個人的な感想として、JSXは「ものすごく好き嫌いが分かれる」と直観しました。明確なメリットがないと、会社によっては導入が難しいかもしれません。<h2 id=->参考</h2><ul><li><a href=http://qiita.com/star__hoshi/items/34eb4ccafcfa100b5cad>React + Redux + TypeScript でWebアプリを作った感想・勉強法と Angular との比較 - Qiita</a><li><a href=http://mae.chab.in/archives/2929>ReactとAngular 2の比較（React vs. Angular 2） _ maesblog</a><li><a href=https://html5experts.jp/yoshikawa_t/14459/ >フレームワーク対決！Angular VS React仮想パネルディスカッション _ HTML5Experts.jp</a><li><a href=http://qiita.com/rgbkids/items/8ec309d1bf5e203d2b19>出来る限り短く説明するReact.js入門 - Qiita</a><li><a href=http://qiita.com/sl2/items/ff7a07c00f545d245a5c#view-container>Facebook公式Fluxで始めるReact+Fluxアプリ開発まとめ - Qiita</a><li><a href=http://qiita.com/kyrieleison/items/78b3295ff3f37969ab50>React における State と Props の違い - Qiita</a></ul></div></div><div id=blog-menu><span><strong>最近の記事</strong></span><ul><li class=recent><a href=/blog/document/2019/04/29/markdown-to-confluence/ >Confluenceのドキュメントをマークダウンで書きたい</a><li class=recent><a href=/blog/angular/2019/04/10/angular-error-hadling-implement/ >Angularのエラー処理について考える（実装編）</a><li class=recent><a href=/blog/angular/2019/03/30/angular-error-hadling-design/ >Angularのエラー処理について考える（設計編）</a><li class=recent><a href=/blog/document/2018/10/13/write-spec-with-markdown/ >仕様書をマークダウンで書きたい</a><li class=recent><a href=/blog/data-structure/full-text-search/2018/07/18/full_text_search/ >全文検索を自社サイト・社内サーバーに構築したいクライアントのための留意点</a></ul><span><strong>タグ</strong></span><ul><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%8A%80%E8%A1%93%E7%B7%8F%E8%A6%A7/ >プログラミング技術総覧 (16)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Actor%E3%83%A2%E3%83%87%E3%83%AB/ >Actorモデル (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >リアクティブプログラミング (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/ >機械学習 (6)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88/ >静的サイト (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/ >環境構築 (5)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Docker/ >Docker (5)</a><li class="tag-color-label tag__7"><a href=/blog/tag/AngularJS/ >AngularJS (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/React/ >React (2)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%96/ >アルタスファイブ (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/Vagrant/ >Vagrant (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >プログラミング (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Laravel/ >Laravel (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/OAuth/ >OAuth (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ >アルゴリズム (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/DB/ >DB (2)</a><li class="tag-color-label tag__4"><a href="/blog/tag/Let's%20Encrypt/">Let&#39;s Encrypt (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Chainer/ >Chainer (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%9E%E3%83%AB%E3%82%B3%E3%83%95%E9%80%A3%E9%8E%96/ >マルコフ連鎖 (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/Trie/ >Trie (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/LOUDS/ >LOUDS (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%87%A6%E7%90%86/ >テキスト処理 (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90/ >形態素解析 (2)</a><li class="tag-color-label tag__11"><a href=/blog/tag/Web%20Performer/ >Web Performer (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Spring%20Boot/ >Spring Boot (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Spring%20Framework/ >Spring Framework (2)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E6%9B%B8%E8%A9%95/ >書評 (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E7%B5%84%E7%B9%94%E5%BF%83%E7%90%86%E5%AD%A6/ >組織心理学 (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E3%82%B2%E3%83%BC%E3%83%A0%E7%90%86%E8%AB%96/ >ゲーム理論 (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Python/ >Python (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Double%20array/ >Double array (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E6%9C%80%E9%81%A9%E5%8C%96/ >最適化 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA/ >システム開発 (6)</a><li class="tag-color-label tag__9"><a href=/blog/tag/TERASOLUNA/ >TERASOLUNA (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E7%B5%B1%E8%A8%88%E5%AD%A6/ >統計学 (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/ >データ可視化 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/R/ >R (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E8%B2%A9%E5%A3%B2%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/ >販売管理システム (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E7%94%A8%E8%AA%9E%E9%9B%86/ >用語集 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9C%E3%83%88%E3%83%AB%E3%83%8D%E3%83%83%E3%82%AF/ >ボトルネック (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/Jupyter%20Notebook/ >Jupyter Notebook (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E4%BB%95%E4%BA%8B%E5%8A%B9%E7%8E%87%E5%8C%96/ >仕事効率化 (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ >データ構造 (4)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E5%AE%9F%E8%A3%85/ >実装 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E9%80%A3%E6%83%B3%E9%85%8D%E5%88%97/ >連想配列 (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/Ruby/ >Ruby (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/ >ハッシュテーブル (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%9C%A7%E7%B8%AE/ >テキスト圧縮 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%9C%A7%E7%B8%AE/ >ファイル圧縮 (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E5%85%A8%E6%96%87%E6%A4%9C%E7%B4%A2/ >全文検索 (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E4%BB%95%E6%A7%98%E6%9B%B8/ >仕様書 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%80%E3%82%A6%E3%83%B3/ >マークダウン (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/a5doc/ >a5doc (2)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Angular/ >Angular (2)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%86/ >エラー処理 (2)</a><li class="tag-color-label tag__7"><a href=/blog/tag/SPA/ >SPA (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/Confluence/ >Confluence (1)</a></ul></div></div><div class=w_const><div id=fb-root></div><script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=331911723808007";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script><ul class=socialbuttons><li class=twitter><a href=https://twitter.com/share class=twitter-share-button>Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script><li class=facebook><div class=fb-like data-href=https://www.altus5.co.jpundefined data-layout=box_count data-action=like data-size=small data-show-faces=false data-share=false></div><li class=hatena><a href=http://b.hatena.ne.jp/entry/ class=hatena-bookmark-button data-hatena-bookmark-layout=vertical-normal data-hatena-bookmark-lang=ja data-hatena-bookmark-title=AngularJS%20vs%20React%20%u305D%u308C%u305E%u308C%u306E%u5229%u70B9%u3068%u7279%u5FB4%uFF08React%u7DE8%uFF09 title=このエントリーをはてなブックマークに追加><img src=https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png alt=このエントリーをはてなブックマークに追加 width=20 height=20 style="border: none"></a><script src=https://b.st-hatena.com/js/bookmark_button.js charset=utf-8 async></script><li class=pocket><a data-pocket-label=pocket data-pocket-count=vertical class=pocket-btn data-lang=ja></a><script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script><li class=feedly><a href=//feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.altus5.co.jp%2Ffeed.xml target=blank><img id=feedlyFollow src=http://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png alt="follow us in feedly" width=66 height=20></a></ul><div class=relate><h1>関連記事</h1><ul><li class=post-link><span class=post-date>2017/01/30 </span><a class=post-title href=/blog/AngularJS/React/2017/01/30/angularjs-vs-react/ >AngularJS vs React それぞれの利点と特徴（Angular編） </a><span class=post-description><a href=/blog/AngularJS/React/2017/01/30/angularjs-vs-react/ >「Angular 2」「React」両フレームワークでToDoツールを作成する記事です。実装過程と成果物を比較して、両者のフレームワークの良いところ・悪いところを検証したいと思います。（Angular編）</a></span><li class=post-link><span class=post-date>2018/07/18 </span><a class=post-title href=/blog/data-structure/full-text-search/2018/07/18/full_text_search/ >全文検索を自社サイト・社内サーバーに構築したいクライアントのための留意点 </a><span class=post-description><a href=/blog/data-structure/full-text-search/2018/07/18/full_text_search/ >システム開発における「全文検索」の実装方式・コスト・性能に関して、クライアント企業の方にも腹落ち頂けるようまとめました。grep型と索引型の違いに関する平易な解説を記載しているので、これらをクライアントに解説されたい開発者にもオススメです。</a></span><li class=post-link><span class=post-date>2018/02/01 </span><a class=post-title href=/blog/machine-learning/2018/02/01/data-visualization/ >利益管理のためのデータ可視化　技術者にできる事は何か？ </a><span class=post-description><a href=/blog/machine-learning/2018/02/01/data-visualization/ >データ可視化は科学技術分野において発祥した技術であり、与えられたデータから自動的に「見やすい図示」を出力するアルゴリズムを指します。データを見やすくし、ビジネスの意思決定に活用するという観点から手法を紹介し、R言語によるデモを行います。</a></span><li class=post-link><span class=post-date>2017/12/28 </span><a class=post-title href=/blog/machine-learning/2017/12/28/difference-of-3-methods/ >機械学習・統計学・最適化の違いについてまとめてみた </a><span class=post-description><a href=/blog/machine-learning/2017/12/28/difference-of-3-methods/ >「機械学習」という手法は、システム開発の現場で用いられる事例が急増しています。一方、「統計学」という分野も機械学習と同様にデータを扱い、やはり多数の事例があります。本記事は「機械学習と統計学の違い」について整理することを試みます。</a></span><li class=post-link><span class=post-date>2017/12/04 </span><a class=post-title href=/blog/optimization/2017/12/04/optimization/ >システムによる最適化を通じて、開発者がめざすもの　〜エレベーターの制御システムを例に〜 </a><span class=post-description><a href=/blog/optimization/2017/12/04/optimization/ >システム開発においてお客様の要望に応えようとするとき、いろいろなところで「システムによる最適化」を含む開発アイデアを発想します。この記事では、最適化を成り立たせる「目的関数」と「制約式」という思考法を紹介します。</a></span></ul></div></div></article><article id=scout class=article><h1 class="scout_title w_const">＼(＾▽＾*) 私たちと一緒に働いてみませんか？ (*＾▽＾)／</h1><div class="article__conts w_const"><section class="content01 content"><p>少しでも興味をお持ちいただけたら、お気軽に、お問い合わせください。<p><a href=/contact/entry/ >採用応募受付へ</a><p>(採用応募じゃなく、ただ、会ってみたいという方も、大歓迎です。)</section></div></article></div><footer id=_footer><nav class=w_const><div class="content01 cf"><div class=profile><h1 class=foot_logo><a href=/ ><img src=/images/logo_footer.png alt=Altus-Five（アルタスファイブ）></a></h1><div class=address><p class=paragraph>〒160-0022<p class=paragraph>東京都新宿区新宿2-1-9 ステラ新宿5F<p class=paragraph><a href=tel:03-6904-5573>TEL：03-6904-5573</a></div></div><ul class="links links01"><li class=link><a href=/ >TOP</a><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a></ul><ul class="links links02"><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class=link><a href=/privacy/ >個人情報保護方針</a><li class=link><a href=/contact/ >お問い合わせ</a></ul><ul class=marks><li class=mark><img src=/images/p_mark.png alt=""></ul></div><div id=copyright>© 2016 Altus-Five Co.,LTD. ALL RIGHTS RESERVED.</div></nav></footer><script src="/scripts/vendor.js?rev=0222573b207f1383f49b8afd2629c0fd"></script><script>$(function() {
+      var fout = false;
+      var orgFontFamily;
+      if (fout) {
+        var orgFontFamily = $('body').css('font-family');
+        $('body').css({'font-family': "'Helvetica', 'Arial', 'メイリオ', 'Meiryo', 'MS  PGothic', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif"});
+      }
+      WebFont.load({
+        google: {
+          families: [
+            "PT Sans Narrow:n4,n7"
+          ]
+        },
+        custom: {
+          families: [
+            "Noto Sans Japanese:n4,n7"
+          ]
+        },
+        timeout: 3000,
+        loading: function() {
+          // ロードしているとき allfonts
+        },
+        active: function() {
+          // Web Fontが使用可能になったとき allfonts
+        },
+        inactive: function() {
+          // ブラウザがサポートしていないとき allfonts
+        },
+        fontloading: function(fontFamily, fontDescription) {
+          // fontFamilyをロードしているとき onefont
+        },
+        fontactive: function(fontFamily, fontDescription) {
+          // fontFamilyが使用可能になったとき onefont
+          if (fout) {
+            if ('Noto Sans Japanese' === fontFamily) {
+              $('body').css({'font-family': orgFontFamily});
+            }
+          }
+        },
+        fontinactive: function(fontFamily, fontDescription) {
+          // fontFamilyをブラウザがサポートしていないとき onefont
+        }
+      });
+    });</script><script src="/scripts/common.js?rev=88ed76e81255e2c8404edb27a6c51044"></script><script src="/scripts/jquery.tile.min.js?rev=24209686ddcda6d9849f65fb20bede19"></script><script type=text/x-mathjax-config>MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+        processEscapes: true
+      }
+    });</script><script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
