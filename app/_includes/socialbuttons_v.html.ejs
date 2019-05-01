@@ -1,7 +1,6 @@
 <%
 var hatenaUrl = 's/www.altus5.co.jp/' + page.url;
 var articleUrl = site.url + page.url;
-var rssUrl = site.url + '/feed.xml';
 var articleTitle;
 if (page.title) {
   articleTitle = page.title;
@@ -37,6 +36,6 @@ if (page.title) {
   </li>
   <li class="feedly">
     <%/* https://www.feedly.com/factory.html */%>
-    <a href='//cloud.feedly.com/#subscription%2Ffeed%2F<%= encodeURIComponent(rssUrl) %>'  target='blank'><img id='feedlyFollow' src='//s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png' alt='follow us in feedly' width='66' height='20'></a>
+    <a href='//feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.altus5.co.jp%2Ffeed.xml'  target='blank'><img id='feedlyFollow' src='http://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png' alt='follow us in feedly' width='66' height='20'></a>
   </li>
 </ul>
