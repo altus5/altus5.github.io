@@ -1,7 +1,7 @@
 ---
 layout: app/_layouts/post.html.ejs
 title:  "IntelliJ系IDEのインスペクションをCLIで実行する"
-date:   2019-09-15 06:00:00 +0900
+date:   2019-10-15 06:00:00 +0900
 categories: blog intellij
 description: "コーディングスタイルのチェックを linter とかじゃなくて、 IntelliJ の インスペクションに委ねている開発チーム向けに、IDEを起動することなく、コマンドラインから、IntelliJ の インスペクションを実行する方法をご紹介します。CI環境でのインスペクションにも使えるんじゃないでしょうか？"
 tags:
