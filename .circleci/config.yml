@@ -8,7 +8,7 @@ jobs:
       STAGING_USER_EMAIL: char.siu.men@gmail.com
     working_directory: ~/wsk
     docker:
-      - image: altus5/web-starter-kit:0.6.5_1
+      - image: altus5/web-starter-kit:0.6.5_4
     steps:
       - checkout
       - restore_cache:
