@@ -10,7 +10,7 @@ tags:
 - "ログ監視"
 ---
 
-AWS に サーバーレスなシステムを構築したときのログは、 CloudWatch Logs を使うことになりますが、いざ設定しようとすると、これはこれで、いろいろ面倒です。
+AWS に サーバーレスなシステムを構築したときのログは、 CloudWatch Logs を使うことになりますが、エラーログの監視設定をするときの手順をご紹介します。  
 
 AWS コンソール画面から設定するやり方は、他にも、たくさん記事があるので、本記事では、 コピペで再利用できるように aws cli で設定するやり方で説明します。
 
@@ -58,7 +58,7 @@ aws sns subscribe \
 
 ```
 
-しばらくすると AWS Notification - Subscription Confirmation という件名のメールが来ると思います。本文を確認して Confirm を行ってください。
+しばらくすると AWS Notification - Subscription Confirmation という件名のメールが来ます。本文を確認して Confirm を行ってください。
 
 ちなみに、何回か設定を修正することになると思うので、削除するときのコマンドも載せておきます。
 
@@ -146,7 +146,7 @@ aws cloudwatch delete-alarms \
 ### 確認
 
 ログを書き込んでメール通知されることを確認します。  
-ログストリームの作成が必要です。なんでもよいので、 "test" というログストリームを作ります。
+ログストリームの作成が必要ですが、なんでもよいので、 "test" というログストリームを作ります。
 
 ```bash
 # テスト用のログストリームを作成する
@@ -155,7 +155,7 @@ aws logs create-log-stream \
     --log-group-name ${LOG_GROUP_NAME} \
     --log-stream-name ${LOG_STREMA_NAME}
 
-## エラーログを書き込む
+# エラーログを書き込む
 CURRENT_TIME_MS=$(($(date +%s%N)/1000000))
 aws logs put-log-events \
     --log-group-name ${LOG_GROUP_NAME} \
@@ -164,6 +164,7 @@ aws logs put-log-events \
 
 ```
 
+監視の間隔を60秒に設定しているので、60秒くらい待って、メールを確認します。  
 メール通知が確認できたら、 "test" ログストリームを削除します
 
 ```bash
@@ -237,7 +238,7 @@ aws sns subscribe \
 
 ```
 
-しばらくすると AWS Notification - Subscription Confirmation という件名のメールが来ると思います。本文を確認して Confirm を行ってください。
+しばらくすると AWS Notification - Subscription Confirmation という件名のメールが来ます。本文を確認して Confirm を行ってください。
 
 ### サブスクライブする Lambda 関数用の Role の作成
 
