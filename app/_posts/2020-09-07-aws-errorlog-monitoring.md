@@ -1,7 +1,7 @@
 ---
 layout: app/_layouts/post.html.ejs
 title:  AWSのエラーログ監視の設定
-date:   2020-06-15 09:00:00 +0900
+date:   2020-09-07 09:00:00 +0900
 categories: blog etl
 description: "AWSにサーバーレスなシステムを構築したときのログ監視のやり方を説明します。簡単に再利用できるようにできるだけCLIで設定します。"
 tags:
