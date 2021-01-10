@@ -33,7 +33,7 @@ Dockerfile
 ```
 FROM alpine:3.4
 
-ENV DOCKER_CLIENT_VERSION=1.12.3
+ENV DOCKER_CLIENT_VERSION=latest
 
 RUN apk add --update curl bash \
   && rm -rf /var/cache/apk/* \
