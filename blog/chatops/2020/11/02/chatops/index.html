@@ -1,0 +1,319 @@
+<!doctype html><html dir=ltr lang=ja><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=alternate hreflang=ja href=https://www.altus5.co.jp/ ><title>ChatOpsのススメ | ALTUS-FIVE</title><meta name=description content="SlackのChatbotをMS製のBot Frameworkで作成してみました。簡単に作り方を説明します。"><meta name=viewport content="width=device-width,initial-scale=1"><meta property=og:title content="ChatOpsのススメ | ALTUS-FIVE"><meta property=og:type content=website><meta property=og:url content=https://www.altus5.co.jp><meta property=og:description content="SlackのChatbotをMS製のBot Frameworkで作成してみました。簡単に作り方を説明します。"><meta property=og:site_name content=ALTUS-FIVE><meta property=og:image content=https://www.altus5.co.jp/images/ogp.png><meta name=twitter:card content=summary><meta name=twitter:url content=https://www.altus5.co.jp><meta name=twitter:title content="ChatOpsのススメ | ALTUS-FIVE"><meta name=twitter:description content="SlackのChatbotをMS製のBot Frameworkで作成してみました。簡単に作り方を説明します。"><meta name=twitter:image content=https://www.altus5.co.jp/images/ogp.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple_touch_icon180x180.png><link rel=apple-touch-icon sizes=152x152 href=/images/apple_touch_icon152x152.png><link rel=apple-touch-icon sizes=120x120 href=/images/apple_touch_icon120x120.png><link rel=apple-touch-icon sizes=76x76 href=/images/apple_touch_icon76x76.png><link href=https://www.altus5.co.jp/feed.xml rel=alternate type=application/atom+xml><link rel=stylesheet href="/styles/common.css?rev=8b1b5b6baabfd0e227afbbbf65f3f876"><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js></script><script src=/scripts/gist-embed.min.js></script><link rel=stylesheet href="/styles/blog.css?rev=91052963bc4d9e7323a23dd1555b90ac"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/emojione@4.0.0/extras/css/emojione.min.css><body><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5WGNWC" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5WGNWC');</script><!--[if lt IE 9]>
+    <p class="browserupgrade">
+      <strong>古い</strong>ブラウザをご使用されています。
+      本サイトを快適に閲覧頂くために、<a href="http://browsehappy.com/">新しいブラウザにアップグレード</a>してください。
+    </p>
+  <![endif]--><header id=_header><nav class="w_const cf"><h1 class=logo_head><a href=/ ><img src=/images/logo_header.png alt=ALTUS-FIVE（アルタスファイブ）></a></h1><ul class=links><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class="link link_contact"><a href=/contact/ >お問い合わせ</a></ul></nav></header><div id=blog_page class=wrap_all><article id=blog class=article><section class="blog__title w_const"><span>ChatOpsのススメ</span></section><div class="article__conts w_const cf"><div id=blog-content><div id=blog-subtitle class=cf><div id=blog-date>2020/11/02</div><div id=blog-tags><ul class=tag-uline><li class="tag-uline-label tag__5"><a href=/blog/tag/AWS/ >AWS</a><li class="tag-uline-label tag__0"><a href=/blog/tag/Chatbot/ >Chatbot</a><li class="tag-uline-label tag__1"><a href=/blog/tag/ChatOps/ >ChatOps</a><li class="tag-uline-label tag__2"><a href=/blog/tag/Lambda/ >Lambda</a><li class="tag-uline-label tag__3"><a href=/blog/tag/Bot%20Builder/ >Bot Builder</a><li class="tag-uline-label tag__4"><a href=/blog/tag/Slack/ >Slack</a></ul></div></div><div class=markdown-body><p>Slack の Chatbot を作ってみたいなぁ・・・と、なんとなく思いながらも、でも、会話ロボットがほしいわけでもないので、手を出してなかったのですが、 AWS Chatbot で ChatOps の一端に触れる機会があり、少し興味が出てきたので、どんなものなのかを調べてみることにしました。<br>うまくいけば、社内専用の Chatbot を育てながら、普段の仕事の中で ChatOps が実践できるとよいなと思ってます。<br>この記事では、サンプルを動かしたところまでを順を追ってご紹介します。<h2 id=chatbot->Chatbot のフレームワーク</h2><p>普段一番使っているのが Slack なので、Slack の Bot を作ります。<br>できるだけ仕事で使える ChatOps にしたいので、最初から Chatbot のフレームワークを使って、先々の高機能化に耐えられるものに目指します。<p>そんなわけで、<a href=https://www.npmtrends.com/hubot-vs-botbuilder-vs-rasa-nlu-trainer-vs-botkit-vs-botpress>npm trends</a> で比較検索してみました。<p><img src=/images/blog/chatops/npm-trends.png alt="npm trends"><p>Hubot というのを見聞きしたことがありましたが Bot Builder の Download 数が一番多いようです。<br>Bot Builder は Microsoft の OSS で、開発が止まってしまう心配もないので、これを使うことにします。<p>Bot Builder は、対応している Chat が 2020年11月時点で、21 種類もあって、SDKが4つの言語用（C# / JavaScript / Python / Java）に用意されています。<br>そして、サンプル実装が、大量にあります。<p>今回は、この中から Python SDK を使って Slack のサンプルを動かすことにします。<ul><li><strong>Bot Framework SDK</strong>:<br><a href=https://github.com/microsoft/botframework-sdk>https://github.com/microsoft/botframework-sdk</a><li><strong>Bot Framework SDK for Python</strong>:<br><a href=https://github.com/microsoft/BotBuilder-python>https://github.com/microsoft/BotBuilder-python</a><li><strong>サンプル</strong>:<br><a href=https://github.com/microsoft/BotBuilder-Samples/ >https://github.com/microsoft/BotBuilder-Samples/</a><li><strong>Slack Adapterのサンプル</strong><br><a href=https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/60.slack-adapter>https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/60.slack-adapter</a></ul><p>他にも、 Slack Bot の仕組みも、読んでおいた方がよいでしょう。<br>こちらの記事が、判りやすかったように思います。<ul><li><strong>Slack Botの種類と大まかな作り方</strong><br><a href=https://qiita.com/namutaka/items/233a83100c94af033575>https://qiita.com/namutaka/items/233a83100c94af033575</a></ul><p>Slack の API は、 Slack Adapter が吸収してくれるので、当面は、Slack API の仕様は不要かと思いますが、こちらで参照することができます。<ul><li><strong>Slack API</strong><br><a href=https://api.slack.com/apis>https://api.slack.com/apis</a></ul><p>上記の <a href=https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/60.slack-adapter>Slack Adapterのサンプル</a> は <a href=https://azure.microsoft.com/en-us/services/bot-service/ >Azure Bot Service</a> を使って Slack に接続してメッセージに応答するシンプルなエコーボットです。<p>でも仕事では、AWS を使うことが多いので、 Lambda にデプロイして <strong>Slack Bot をサーバーレスで運用</strong> できるようにします。<h2 id=->ローカル環境を作成する</h2><p>開発は、Dockerコンテナで行いますが、環境を作る前に、メッセージが、どんな感じで流れるのかを説明します。<br>サンプルの Bot は、Slack の Event API を使っています。<p><img class=emojione alt=📝 title=:pencil: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f4dd.png>前提<ul><li>コンテナ内の Bot は、Webサーバー機能が動いていて Slack の Event を受信する API が実装されてある<li>ngrok でパブリックな URL を取得して ローカルPC で動く Bot の Event 受信API にフォワードされる<li>Slack アプリの Event Subscriptions の Request URL に ngrok の URL を設定する<li>Slack アプリをチャンネルに追加する</ul><p><img class=emojione alt=📝 title=:pencil: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f4dd.png>メッセージの流れ<ul><li>チャンネルでメッセージを投稿する<li>Slack が ngrok の URL にメッセージを POST する<li>ngrok がコンテナ内の Bot にメッセージをフォワードする<li>コンテナ内の Bot は POST されたメッセージを読んで、Slack に同じ文言でメッセージ送信する<li>チャンネルに投稿したものと同じメッセージがエコーされる</ul><h3 id=->サンプルをコピーして作業開始</h3><p>それでは、ローカルに環境を作成していきます。<pre><code class=lang-bash># サンプルを clone
+git clone https://github.com/microsoft/BotBuilder-Samples.git
+
+# botディレクトリを作成して、Slack Adapterのサンプルだけコピーする
+mkdir bot
+cd bot
+cp -r ../BotBuilder-Samples/samples/python/60.slack-adapter/* .
+</code></pre><h3 id=-requirements-txt>開発用の requirements.txt</h3><p>開発時にのみ使うモジュールを <code>requirements-dev.txt</code> に追加します。<pre><code class=lang-txt># ランタイムに必要なパッケージ
+-r requirements.txt
+# 開発環境にのみ必要なパッケージ
+awscli
+ptvsd
+pylint
+</code></pre><h3 id=docker->Dockerイメージ</h3><p>Lambdaで実行するので、 Lambda の docker イメージを使います。<br>BotBuilder-python が Python 3.8 前提なので、Dockerイメージも Python3.8 にします。<p><a href=https://github.com/microsoft/BotBuilder-python/#prerequisites>https://github.com/microsoft/BotBuilder-python/#prerequisites</a><p>ngrok と、あとで使用する Severless Framework もインストールしておきます。<p><strong>docker/Dockerfile</strong><pre><code class=lang-dockerfile>FROM lambci/lambda:build-python3.8
+
+# python を lambda にデプロイするときには、 requirements.txt から依存モジュールのインストールをするが、
+# slsでそれをするのは、plugin が必要で、その plugin が Docker を必要とする
+COPY --from=docker:19.03 /usr/local/bin/docker /usr/local/bin/
+
+# serverless framework
+## serverless-python-requirements は最新の 5．1.0 では、
+## deploy時にエラーが出るので、4.3.0 を使う
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash \
+    &amp;&amp; yum install -y nodejs \
+    &amp;&amp; npm install -g serverless \
+    &amp;&amp; npm install -g serverless-python-requirements@4.3.0
+
+# ngrok
+RUN curl -sSL -o ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
+    &amp;&amp; unzip ngrok.zip \
+    &amp;&amp; mv ngrok /usr/local/bin
+
+# このイメージは、ビルドの段階で、requirements-dev.txt を pip install します。
+# `requirements*.txt ` が変更されたときには、ビルドし直してください。
+COPY ./requirements*.txt ./
+RUN pip install -r requirements-dev.txt
+</code></pre><p>docker の起動オプションがいろいろあるので docker-compose にしておきます。<p><strong>docker-compose.yml</strong><pre><code class=lang-yml>version: &#39;3&#39;
+services:
+
+  bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - &#39;.:/opt/bot&#39;
+      # aws cofigure のディレクトリをマウント
+      - &#39;.aws:/opt/.aws&#39;
+      # serverless-python-requirements が Docker を使うので、
+      # dood (Docker outside of Docker) でコンテナ内からホストのDockerを使う
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: &#39;/opt/bot&#39;
+    environment:
+      # aws cofigure の配置場所を設定
+      AWS_CONFIG_FILE: /opt/.aws/config
+      AWS_SHARED_CREDENTIALS_FILE: /opt/.aws/credentials
+    ports:
+      # ngrok 用
+      - 3978:3978
+      # ptvsd 用
+      - 5678:5678
+    command: &#39;sleep infinity&#39;
+</code></pre><h3 id=->ビルドとコンテナの起動</h3><pre><code class=lang-bash>docker-compose build
+
+# コンテナを起動
+docker-compose up -d
+</code></pre><h2 id=bot-slack-application->Bot 用の Slack Application を作成する</h2><ol><li><p>Slackにログインして、<a href=https://api.slack.com/apps>アプリ一覧</a> ページを開きます。<li><p>&#39;Create new app&#39; ボタンをクリック<li><p>&quot;App Name&quot; を入力し &quot;Development Slack Workspace&quot; を選択<li><p>&quot;Create App&quot; ボタンをクリック</ol><p>サンプルを動かすために必要な設定は、 <strong>Basic Information</strong> と <strong>OAuth &amp; Permissions</strong> にあります。<ol><li><p><strong>Basic Information</strong> は、すでに設定されていますが、 &quot;Display Information&quot; のところを、任意に変更してください。<li><p><strong>OAuth &amp; Permissions</strong> は、&quot;Bot Token Scopes&quot; で &quot;Add an OAuth Scope&quot; ボタンをクリックして <code>chat:write</code>, <code>im:history</code>, <code>im:read</code> を追加してください。<li><p>上の方にスクロールすると、&quot;Install App to Workspace&quot; がクリックできるようになっているので、クリックします。<li><p>OAuth の権限の確認画面が表示されるので、&quot;許可&quot;をクリックします。</ol><p>Slack Application の設定は、まだやることがあるのですが、いったん、次に進みます。<h2 id=->環境変数を設定する</h2><p>環境変数に、Slack のアプリ情報を設定します。<pre><code class=lang-bash># Basic Information の Verification Token
+export SlackVerificationToken=&quot;xxxxxxxxxxx&quot;
+
+# Basic Information の Signing Secret
+export SlackClientSigningSecret=&quot;xxxxxxxxxxx&quot;
+
+# OAuth &amp; Permissions の Bot User OAuth Access Token
+export SlackBotToken=&quot;xxxxxxxxxxx&quot;
+</code></pre><h2 id=ngrok-url->Ngrok でテスト用のURLを準備する</h2><p><a href=https://www.ngrok.com>Ngrok</a> を使ったことがない場合には、下記の記事を読んでおいてください。<ul><li><a href=https://qiita.com/kitaro0729/items/44214f9f81d3ebda58bd>https://qiita.com/kitaro0729/items/44214f9f81d3ebda58bd</a></ul><p>Dockerイメージには、ngrok のコマンドはインストール済です。 特に、Sign in しなくても、使えますが、長時間のテストをする場合には、Sign In するとよいと思います。どっちでも、無料プランでテストできます。<p>botコンテナに入ります。<br><code>docker-compose exec bot bash</code><p>コンテナ内で ngrok を起動します。<br><code>ngrok http 3978 -host-header=&quot;127.0.0.1:3978&quot;</code><p>テスト中は、起動したままにします。<h2 id=bot->Bot を起動</h2><p>上記とは異なるターミナルから、コンテナ内に入ります。<br><code>docker-compose exec bot bash</code><p>botを起動します。<br><code>python app.py</code><p>この時点では、WEBサーバーが起動しただけなので、まだ何も動きはないです。<h2 id=slack-application-event-subscriptions->Slack Application の Event Subscriptions を有効にする</h2><p>サンプルの Bot は、Slack の Event API を使っているので、そのための設定を行います。<p><a href=[https://api.slack.com/apps]>Slack api dashboard</a> から作成した Slack Application を選択します。<ol><li><p><strong>Event Subscriptions</strong> を選択<li><p>Enable Events を On にする<li><p>&#39;Request URL&#39; に ngrok で Forwarding される https で始まる URL を設定する<br>ただし、ngrok の URL は、ホスト名だけなので、サンプルがルーティング実装している <code>/api/messages</code> をパスに加えます。<br>（例）<a href=https://xxxxxxxxxx.ngrok.io/api/messages>https://xxxxxxxxxx.ngrok.io/api/messages</a><li><p><strong>&#39;Subscribe to bot events&#39;</strong> を展開して、&#39;Add Bot User Event&#39; ボタンをクリックして、<code>message.im</code> を追加する</ol><h2 id=-1->動かしてみる(1)</h2><p>Slack のチャンネルに作成したSlackアプリを招待します。<br>そして、以下を試してみてください。<ul><li><p>チャンネルにメッセージを書き込む<br><img class=emojione alt=😄 title=:smile: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f604.png>同じメッセージがエコーされる<li><p>添付ファイルを付けてメッセージを書き込む<br><img class=emojione alt=😄 title=:smile: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f604.png>メッセージのエコーと、添付ファイルを受信したことがエコーされる<li><p>メッセージにURLを含めて送信する<br><img class=emojione alt=😄 title=:smile: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f604.png>メッセージのエコーと、URLを受信したことがエコーされる</ul><h2 id=-2->動かしてみる(2)</h2><p><code>/test</code> コマンドもサンプルに実装されています。<br>Slack Application の設定にコマンドを追加します。<h2 id=slack-application->Slack Application にコマンドを追加設定</h2><ol><li><p><a href=https://api.slack.com/apps>アプリ一覧</a> からアプリを選択<li><p>&quot;Slash Commands&quot; を選択<li><p>&quot;Create New Command&quot; ボタンをクリック<li><p>以下の内容を入力<ul><li>Command: <code>/test</code><li>Request URL: <code>https://xxxxxxxxxx.ngrok.io/api/slack</code><br>（xxxxxxxxxx 部分は、ngrok の Forwarding のURLを参照）<li>Short Description: <code>テスト</code></ul><li><p>”Save” ボタンをクリック</ol><h2 id=->コマンド実行</h2><p>コマンドは、Slack の Workspace 全体で使われます。<ul><li>任意のチャンネルで <code>/test</code> を送信する<br><img class=emojione alt=😄 title=:smile: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f604.png>処理されて、ディナーのレストラン選択のメッセージが返信されます。</ul><h2 id=lambda->Lambda 用の変更</h2><p>さて、Ngrok で動くことを確認したら、次には、Lambda にデプロイして、サーバーレスで動かしてみます。<h3 id=lambda-event-request->LambdaのeventオブジェクトからRequestオブジェクトへの変換</h3><p>Bot Builder は、WEB APIで動くことが前提になっているようで、Slack Adapter とのインターフェースで <code>aiohttp.web_request.Request</code> が使われています。<p>Lambda の handler の引数の event オブジェクトとは、違うものなので、変換してから渡すことにします。<p><code>app.py</code> を修正します。<pre><code class=lang-python>import sys
+import traceback
+import logging
+import json
+import base64
+import asyncio
+from datetime import datetime
+from urllib.parse import parse_qs
+from aiohttp.web_request import Request
+from aiohttp.web_response import Response
+from aiohttp import test_utils
+from aiohttp.streams import StreamReader
+from aiohttp.test_utils import make_mocked_request
+from unittest import mock
+
+from botbuilder.adapters.slack import SlackAdapterOptions
+from botbuilder.adapters.slack import SlackAdapter
+from botbuilder.adapters.slack import SlackClient
+from botbuilder.core import TurnContext
+from botbuilder.core.integration import aiohttp_error_middleware
+from botbuilder.schema import Activity, ActivityTypes
+
+from bots import EchoBot
+from config import DefaultConfig
+
+CONFIG = DefaultConfig()
+
+# Create adapter.
+SLACK_OPTIONS = SlackAdapterOptions(
+    CONFIG.SLACK_VERIFICATION_TOKEN,
+    CONFIG.SLACK_BOT_TOKEN,
+    CONFIG.SLACK_CLIENT_SIGNING_SECRET,
+)
+SLACK_CLIENT = SlackClient(SLACK_OPTIONS)
+ADAPTER = SlackAdapter(SLACK_CLIENT)
+
+_logger = logging.getLogger(__name__)
+
+# Catch-all for errors.
+async def on_error(context: TurnContext, error: Exception):
+    _logger.error(f&quot;\n [on_turn_error] unhandled error: {error}&quot;, exc_info=True)
+
+ADAPTER.on_turn_error = on_error
+
+# Create the Bot
+echo_bot = EchoBot()
+
+
+# Listen for incoming requests on /api/messages
+async def messages(req: Request) -&gt; Response:
+    return await ADAPTER.process(req, echo_bot.on_turn)
+
+
+# Listen for incoming slack events on /api/slack
+async def slack(req: Request) -&gt; Response:
+    return await ADAPTER.process(req, echo_bot.on_turn)
+
+
+def handler(event, context):
+    if _logger.level &lt;= logging.DEBUG:
+        _logger.debug(f&#39;event={event}&#39;)
+    try:
+        result = asyncio.get_event_loop().run_until_complete(__async_handler(event, context))
+        return __respond(None, result)
+    except Exception as e:
+        _logger.error(&#39;エラー発生&#39;, exc_info=True)
+        return __respond(e)
+
+
+async def __async_handler(event, context):
+    request = await __conv_lambda_event_to_request(event, context)
+    response = await messages(request)
+    return response
+
+
+def __respond(err, res=None):
+    if err:
+        lamda_res = {
+            &#39;statusCode&#39;: &#39;400&#39;,
+            &#39;body&#39;: type(err),
+            &#39;headers&#39;: {
+                &#39;Content-Type&#39;: &#39;text/plain&#39;
+            },
+        }
+    else:
+        lamda_res = {
+            &#39;statusCode&#39;: res.status,
+            &#39;body&#39;: res.text,
+            &#39;headers&#39;: {},
+        }
+        for k, v in res.headers.items():
+            lamda_res[&#39;headers&#39;][k] = v
+    if _logger.level &lt;= logging.DEBUG:
+        _logger.debug(f&#39;__respond={lamda_res}&#39;)
+    return lamda_res
+
+
+async def __conv_lambda_event_to_request(event, context):
+    &#39;&#39;&#39; lambda の event から aiohttp の Request に変換する
+
+    この変換処理は、 aiohttp のユニットテスト用のユーティリティ
+    test_utils を使っています。
+    &#39;&#39;&#39;
+
+    body = event.get(&#39;body&#39;, &#39;&#39;)
+    if not event.get(&#39;isBase64Encoded&#39;, False):
+        data = body.encode()
+    else:
+        data = base64.b64decode(body)
+
+    protocol = mock.Mock(_reading_paused=False)
+    payload = StreamReader(protocol=protocol, limit=2 ** 16, loop=asyncio.get_event_loop())
+    payload.feed_data(data)
+    payload.feed_eof()
+
+    req = make_mocked_request(
+        method=event[&#39;httpMethod&#39;],
+        path=event[&#39;path&#39;],
+        headers=event[&#39;headers&#39;],
+        payload=payload)
+    return req
+</code></pre><h3 id=serverless-framework>Serverless Framework</h3><p>デプロイは、Serverless Framework で行います。<p><strong>serverless.yml</strong><pre><code class=lang-yml>service: bot
+frameworkVersion: &#39;2&#39;
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ${opt:stage, self:custom.defaultRegion}
+  # ログの保存期間
+  logRetentionInDays: 5
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - &quot;logs:CreateLogGroup&quot;
+        - &quot;logs:CreateLogStream&quot;
+        - &quot;logs:PutLogEvents&quot;
+      Resource:
+        - &quot;arn:aws:logs:::&quot;
+  environment: ${self:custom.environment.${self:provider.stage}}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    layer: true
+  defaultStage: dev
+  defaultProfile: default
+  defaultRegion: ap-northeast-1
+  environment:
+    dev: ${file(./conf/dev.yml)}
+    prod: ${file(./conf/prod.yml)}
+
+package:
+  exclude:
+    - .aws/**
+
+functions:
+  handler:
+    handler: app.handler
+    events:
+      - http:
+          path: api/messages
+          method: post
+          cors: true
+      - http:
+          path: api/slack
+          method: post
+          cors: true
+    layers:
+      - {Ref: PythonRequirementsLambdaLayer}
+</code></pre><p>環境変数は yml にします。<p><strong>conf/dev.yml</strong><pre><code class=lang-yml># Basic Information の Verification Token
+SlackVerificationToken: &quot;xxxxxxxxxxx&quot;
+
+# Basic Information の Signing Secret
+SlackClientSigningSecret: &quot;xxxxxxxxxxx&quot;
+
+# OAuth &amp; Permissions の Bot User OAuth Access Token
+SlackBotToken: &quot;xxxxxxxxxxx&quot;
+</code></pre><h3 id=->デプロイ</h3><p>AWSのアカウントは <code>.aws/</code> に作成しておいてください。<pre><code class=lang-bash>sls deploy
+</code></pre><h3 id=slack-application-url-api-gateway->Slack Application の URL を API Gateway のものに変える</h3><p>deploy コマンドが、作成された API Gateway の URL を出力するので、それをコピーして、 Slack Application の設定画面で、URLを置き換えます。<p><a href=[https://api.slack.com/apps]>Slack api dashboard</a> から作成した Slack Application を選択します。<ol><li><p><strong>Event Subscriptions</strong> を選択<li><p>&#39;Request URL&#39; に API Gateway の URL を設定する</ol><h3 id=->動かしてみる</h3><ul><li>チャンネルにメッセージを書き込む<br><img class=emojione alt=😄 title=:smile: src=https://cdn.jsdelivr.net/emojione/assets/4.5/png/32/1f604.png>同じメッセージがエコーされる</ul><hr><h2 id=->まとめ</h2><p>Slack 起点で、いろんなことができそうな気がしてきました。<p>例えば<ul><li>ちょっとしたデプロイのコマンド<li>メンテナンス画面への切替コマンド<li>常時起動してない ec2 の起動<li>社内 wiki の横断検索<li>GitHub への Issue 投稿コマンド<li>リアクションを集計して感謝ネットワークとして可視化<li>社内図書（自炊PDF）の検索<li>チーム内の作業時間の回収と集計</ul><p>・・・。<p>いろいろ試してみようと思います。<p>みなさんも、社内にお助け Chatbot を作ってみてはいかがでしょうか？<p>最後に、実際に chatbot を作ってみようと思ったら、こちらを読んでみることをオススメします。<ul><li><strong>Microsoft Bot Framework v4 完全制覇 : 目次</strong>:<br><a href=https://qiita.com/kenakamu/items/6dc043cfc1f199032883>https://qiita.com/kenakamu/items/6dc043cfc1f199032883</a><li><strong>Bot Framework SDK のドキュメント : 公式ドキュメント</strong>:<br><a href="https://docs.microsoft.com/ja-jp/azure/bot-service/index-bf-sdk?view=azure-bot-service-4.0">https://docs.microsoft.com/ja-jp/azure/bot-service/index-bf-sdk?view=azure-bot-service-4.0</a></ul></div></div><div id=blog-menu><span><strong>最近の記事</strong></span><ul><li class=recent><a href=/blog/wsl2/docker/2021/03/30/wsl2-docker/ >Docker Desktop WSL 2 バックエンドの使い始め</a><li class=recent><a href=/blog/chatops/2020/11/02/chatops/ >ChatOpsのススメ</a><li class=recent><a href=/blog/etl/2020/09/07/aws-errorlog-monitoring/ >AWSのエラーログ監視の設定</a><li class=recent><a href=/blog/etl/2020/06/15/pyspark/ >PySparkの分散される処理単位であるクロージャと共有変数の仕組み</a><li class=recent><a href=/blog/etl/2020/05/17/aws-glue-development/ >私たちの AWS Glue を使った開発のやり方</a></ul><span><strong>タグ</strong></span><ul><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%8A%80%E8%A1%93%E7%B7%8F%E8%A6%A7/ >プログラミング技術総覧 (16)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Actor%E3%83%A2%E3%83%87%E3%83%AB/ >Actorモデル (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >リアクティブプログラミング (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/ >機械学習 (6)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88/ >静的サイト (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/ >環境構築 (5)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Docker/ >Docker (6)</a><li class="tag-color-label tag__7"><a href=/blog/tag/AngularJS/ >AngularJS (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/React/ >React (2)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%96/ >アルタスファイブ (5)</a><li class="tag-color-label tag__10"><a href=/blog/tag/Vagrant/ >Vagrant (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >プログラミング (2)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Laravel/ >Laravel (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/OAuth/ >OAuth (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ >アルゴリズム (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/DB/ >DB (2)</a><li class="tag-color-label tag__4"><a href="/blog/tag/Let's%20Encrypt/">Let&#39;s Encrypt (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Chainer/ >Chainer (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%9E%E3%83%AB%E3%82%B3%E3%83%95%E9%80%A3%E9%8E%96/ >マルコフ連鎖 (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/Trie/ >Trie (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/LOUDS/ >LOUDS (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%87%A6%E7%90%86/ >テキスト処理 (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90/ >形態素解析 (2)</a><li class="tag-color-label tag__11"><a href=/blog/tag/Web%20Performer/ >Web Performer (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Spring%20Boot/ >Spring Boot (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Spring%20Framework/ >Spring Framework (2)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E6%9B%B8%E8%A9%95/ >書評 (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E7%B5%84%E7%B9%94%E5%BF%83%E7%90%86%E5%AD%A6/ >組織心理学 (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E3%82%B2%E3%83%BC%E3%83%A0%E7%90%86%E8%AB%96/ >ゲーム理論 (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Python/ >Python (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Double%20array/ >Double array (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E6%9C%80%E9%81%A9%E5%8C%96/ >最適化 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA/ >システム開発 (6)</a><li class="tag-color-label tag__9"><a href=/blog/tag/TERASOLUNA/ >TERASOLUNA (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E7%B5%B1%E8%A8%88%E5%AD%A6/ >統計学 (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/ >データ可視化 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/R/ >R (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E8%B2%A9%E5%A3%B2%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/ >販売管理システム (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E7%94%A8%E8%AA%9E%E9%9B%86/ >用語集 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9C%E3%83%88%E3%83%AB%E3%83%8D%E3%83%83%E3%82%AF/ >ボトルネック (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/Jupyter%20Notebook/ >Jupyter Notebook (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E4%BB%95%E4%BA%8B%E5%8A%B9%E7%8E%87%E5%8C%96/ >仕事効率化 (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ >データ構造 (4)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E5%AE%9F%E8%A3%85/ >実装 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E9%80%A3%E6%83%B3%E9%85%8D%E5%88%97/ >連想配列 (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/Ruby/ >Ruby (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/ >ハッシュテーブル (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%9C%A7%E7%B8%AE/ >テキスト圧縮 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%9C%A7%E7%B8%AE/ >ファイル圧縮 (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E5%85%A8%E6%96%87%E6%A4%9C%E7%B4%A2/ >全文検索 (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E4%BB%95%E6%A7%98%E6%9B%B8/ >仕様書 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%80%E3%82%A6%E3%83%B3/ >マークダウン (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/a5doc/ >a5doc (2)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Angular/ >Angular (2)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%86/ >エラー処理 (2)</a><li class="tag-color-label tag__7"><a href=/blog/tag/SPA/ >SPA (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/Confluence/ >Confluence (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%81%8A%E3%82%84%E3%81%A4/ >おやつ (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91/ >オブジェクト指向 (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/CI/ >CI (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/PhpStorm/ >PhpStorm (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/IntelliJ/ >IntelliJ (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%9A%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/ >インスペクション (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E6%BC%AB%E7%94%BB/ >漫画 (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E6%8E%A1%E7%94%A8/ >採用 (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/AWS/ >AWS (4)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Glue/ >Glue (2)</a><li class="tag-color-label tag__7"><a href=/blog/tag/Spark/ >Spark (3)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AC%E3%82%B9/ >サーバーレス (3)</a><li class="tag-color-label tag__9"><a href=/blog/tag/PySpark/ >PySpark (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3/ >クロージャ (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/ >ログ監視 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Chatbot/ >Chatbot (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/ChatOps/ >ChatOps (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/Lambda/ >Lambda (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/Bot%20Builder/ >Bot Builder (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/Slack/ >Slack (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/WSL2/ >WSL2 (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/DevOps/ >DevOps (1)</a></ul></div></div><div class=w_const><div id=fb-root></div><script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=331911723808007";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script><ul class=socialbuttons><li class=twitter><a href=https://twitter.com/share class=twitter-share-button>Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script><li class=facebook><div class=fb-like data-href=https://www.altus5.co.jpundefined data-layout=box_count data-action=like data-size=small data-show-faces=false data-share=false></div><li class=hatena><a href=http://b.hatena.ne.jp/entry/ class=hatena-bookmark-button data-hatena-bookmark-layout=vertical-normal data-hatena-bookmark-lang=ja data-hatena-bookmark-title=ChatOps%u306E%u30B9%u30B9%u30E1 title=このエントリーをはてなブックマークに追加><img src=https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png alt=このエントリーをはてなブックマークに追加 width=20 height=20 style="border: none"></a><script src=https://b.st-hatena.com/js/bookmark_button.js charset=utf-8 async></script><li class=pocket><a data-pocket-label=pocket data-pocket-count=vertical class=pocket-btn data-lang=ja></a><script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script><li class=feedly><a href=//feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.altus5.co.jp%2Ffeed.xml target=blank><img id=feedlyFollow src=http://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png alt="follow us in feedly" width=66 height=20></a></ul><div class=relate><h1>関連記事</h1><ul><li class=post-link><span class=post-date>2020/09/07 </span><a class=post-title href=/blog/etl/2020/09/07/aws-errorlog-monitoring/ >AWSのエラーログ監視の設定 </a><span class=post-description><a href=/blog/etl/2020/09/07/aws-errorlog-monitoring/ >AWSにサーバーレスなシステムを構築したときのログ監視のやり方を説明します。簡単に再利用できるようにできるだけCLIで設定します。</a></span><li class=post-link><span class=post-date>2020/05/17 </span><a class=post-title href=/blog/etl/2020/05/17/aws-glue-development/ >私たちの AWS Glue を使った開発のやり方 </a><span class=post-description><a href=/blog/etl/2020/05/17/aws-glue-development/ >弊社での AWS Glue (Spark) を使ったシステムの開発のやり方についてご紹介します。ポイントはできるだけローカルの環境を使うことです。</a></span><li class=post-link><span class=post-date>2020/05/07 </span><a class=post-title href=/blog/etl/2020/05/07/aws-glue/ >AWS Glueのローカル環境を作成する </a><span class=post-description><a href=/blog/etl/2020/05/07/aws-glue/ >Sparkが使えるAWSのサービス(AWS Glue)を使うことになったとき、開発時にかかるGlueの利用料を抑えるために、ローカルに開発環境を作ります。</a></span></ul></div></div></article><article id=scout class=article><h1 class="scout_title w_const">＼(＾▽＾*) 私たちと一緒に働いてみませんか？ (*＾▽＾)／</h1><div class="article__conts w_const"><section class="content01 content"><p>少しでも興味をお持ちいただけたら、お気軽に、お問い合わせください。<p><a href=/contact/entry/ >採用応募受付へ</a><p>(採用応募じゃなく、ただ、会ってみたいという方も、大歓迎です。)</section></div></article></div><footer id=_footer><nav class=w_const><div class="content01 cf"><div class=profile><h1 class=foot_logo><a href=/ ><img src=/images/logo_footer.png alt=Altus-Five（アルタスファイブ）></a></h1><div class=address><p class=paragraph>〒160-0022<p class=paragraph>東京都新宿区新宿2-1-9AIRA新宿御苑ビル7F<p class=paragraph><a href=tel:03-6904-5573>TEL：03-6904-5573</a></div></div><ul class="links links01"><li class=link><a href=/ >TOP</a><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a></ul><ul class="links links02"><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class=link><a href=/privacy/ >個人情報保護方針</a><li class=link><a href=/contact/ >お問い合わせ</a></ul><ul class=marks><li class=mark><img src=/images/p_mark.png alt=""></ul></div><div id=copyright>© 2016 Altus-Five Co.,LTD. ALL RIGHTS RESERVED.</div></nav></footer><script src="/scripts/vendor.js?rev=552120558cefaab8fa7ce89568b11848"></script><script>$(function() {
+      var fout = false;
+      var orgFontFamily;
+      if (fout) {
+        var orgFontFamily = $('body').css('font-family');
+        $('body').css({'font-family': "'Helvetica', 'Arial', 'メイリオ', 'Meiryo', 'MS  PGothic', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif"});
+      }
+      WebFont.load({
+        google: {
+          families: [
+            "PT Sans Narrow:n4,n7"
+          ]
+        },
+        custom: {
+          families: [
+            "Noto Sans Japanese:n4,n7"
+          ]
+        },
+        timeout: 3000,
+        loading: function() {
+          // ロードしているとき allfonts
+        },
+        active: function() {
+          // Web Fontが使用可能になったとき allfonts
+        },
+        inactive: function() {
+          // ブラウザがサポートしていないとき allfonts
+        },
+        fontloading: function(fontFamily, fontDescription) {
+          // fontFamilyをロードしているとき onefont
+        },
+        fontactive: function(fontFamily, fontDescription) {
+          // fontFamilyが使用可能になったとき onefont
+          if (fout) {
+            if ('Noto Sans Japanese' === fontFamily) {
+              $('body').css({'font-family': orgFontFamily});
+            }
+          }
+        },
+        fontinactive: function(fontFamily, fontDescription) {
+          // fontFamilyをブラウザがサポートしていないとき onefont
+        }
+      });
+    });</script><script src="/scripts/common.js?rev=88ed76e81255e2c8404edb27a6c51044"></script><script src="/scripts/jquery.tile.min.js?rev=24209686ddcda6d9849f65fb20bede19"></script><script type=text/x-mathjax-config>MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+        processEscapes: true
+      }
+    });</script><script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>

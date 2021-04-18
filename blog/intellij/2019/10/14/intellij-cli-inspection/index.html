@@ -1,0 +1,149 @@
+<!doctype html><html dir=ltr lang=ja><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=alternate hreflang=ja href=https://www.altus5.co.jp/ ><title>IntelliJ系IDEのインスペクションをCLIで実行する | ALTUS-FIVE</title><meta name=description content="コーディングスタイルのチェックを linter とかじゃなくて、 IntelliJ の インスペクションに委ねている開発チーム向けに、IDEを起動することなく、コマンドラインから、IntelliJ の インスペクションを実行する方法をご紹介します。CI環境でのインスペクションにも使えるんじゃないでしょうか？"><meta name=viewport content="width=device-width,initial-scale=1"><meta property=og:title content="IntelliJ系IDEのインスペクションをCLIで実行する | ALTUS-FIVE"><meta property=og:type content=website><meta property=og:url content=https://www.altus5.co.jp><meta property=og:description content="コーディングスタイルのチェックを linter とかじゃなくて、 IntelliJ の インスペクションに委ねている開発チーム向けに、IDEを起動することなく、コマンドラインから、IntelliJ の インスペクションを実行する方法をご紹介します。CI環境でのインスペクションにも使えるんじゃないでしょうか？"><meta property=og:site_name content=ALTUS-FIVE><meta property=og:image content=https://www.altus5.co.jp/images/ogp.png><meta name=twitter:card content=summary><meta name=twitter:url content=https://www.altus5.co.jp><meta name=twitter:title content="IntelliJ系IDEのインスペクションをCLIで実行する | ALTUS-FIVE"><meta name=twitter:description content="コーディングスタイルのチェックを linter とかじゃなくて、 IntelliJ の インスペクションに委ねている開発チーム向けに、IDEを起動することなく、コマンドラインから、IntelliJ の インスペクションを実行する方法をご紹介します。CI環境でのインスペクションにも使えるんじゃないでしょうか？"><meta name=twitter:image content=https://www.altus5.co.jp/images/ogp.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple_touch_icon180x180.png><link rel=apple-touch-icon sizes=152x152 href=/images/apple_touch_icon152x152.png><link rel=apple-touch-icon sizes=120x120 href=/images/apple_touch_icon120x120.png><link rel=apple-touch-icon sizes=76x76 href=/images/apple_touch_icon76x76.png><link href=https://www.altus5.co.jp/feed.xml rel=alternate type=application/atom+xml><link rel=stylesheet href="/styles/common.css?rev=8b1b5b6baabfd0e227afbbbf65f3f876"><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js></script><script src=/scripts/gist-embed.min.js></script><link rel=stylesheet href="/styles/blog.css?rev=91052963bc4d9e7323a23dd1555b90ac"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/emojione@4.0.0/extras/css/emojione.min.css><body><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5WGNWC" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5WGNWC');</script><!--[if lt IE 9]>
+    <p class="browserupgrade">
+      <strong>古い</strong>ブラウザをご使用されています。
+      本サイトを快適に閲覧頂くために、<a href="http://browsehappy.com/">新しいブラウザにアップグレード</a>してください。
+    </p>
+  <![endif]--><header id=_header><nav class="w_const cf"><h1 class=logo_head><a href=/ ><img src=/images/logo_header.png alt=ALTUS-FIVE（アルタスファイブ）></a></h1><ul class=links><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class="link link_contact"><a href=/contact/ >お問い合わせ</a></ul></nav></header><div id=blog_page class=wrap_all><article id=blog class=article><section class="blog__title w_const"><span>IntelliJ系IDEのインスペクションをCLIで実行する</span></section><div class="article__conts w_const cf"><div id=blog-content><div id=blog-subtitle class=cf><div id=blog-date>2019/10/15</div><div id=blog-tags><ul class=tag-uline><li class="tag-uline-label tag__11"><a href=/blog/tag/CI/ >CI</a><li class="tag-uline-label tag__0"><a href=/blog/tag/PhpStorm/ >PhpStorm</a><li class="tag-uline-label tag__1"><a href=/blog/tag/IntelliJ/ >IntelliJ</a><li class="tag-uline-label tag__2"><a href=/blog/tag/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%9A%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/ >インスペクション</a></ul></div></div><div class=markdown-body><p>今参加しているプロジェクトは、 PhpStorm が推奨IDEとなっています。<br>コードの品質と統一感を維持するために、IDEのインスペクション機能が活用されているのですが、私は、ほとんど IntelliJ 系のエディタを使って来なかったので、 VSCode で開発してコミットする前に、 PhpStorm を起動して、最終チェックをするという使い方をしてました。<br>でも、普段使いをしていないので、結構、チェックが漏れるんですね。コードレビューで、&quot;IDEの警告が出てます！&quot;という指摘をモリモリいただいて、申し訳ない気持ちになることが、何度もありました。<br>PhpStorm を使え！っていうことなんですけど、エディタを変えたくないので、どうにかできないものか？と思案したお話です。<p>結論としては、 <strong>CIでインスペクションしてエラーを返してくれたらいい</strong> ということなんですけど、そのためには、 PhpStorm のインスペクションが、コマンドラインから実行できないといけません。<br>以降では、 PhpStorm を CLI で実行する方法を中心に記載します。<br>調べてみると、 IntelliJ 系 IDE は、すべてこのやり方が使えることがわかりました。<br>PhpStorm だけじゃなくて、 IntelliJ を使っている方々の CI 環境の構築に、お役立てください。<p>私が、主に参考にした記事は、こちらです。合わせて読んでみてください。<ul><li><a href=https://pleiades.io/help/idea/command-line-code-inspector.html>https://pleiades.io/help/idea/command-line-code-inspector.html</a><li><a href=https://www.christianscheb.de/archives/808>https://www.christianscheb.de/archives/808</a></ul><h2 id=-1-linux->(1) Linux版のダウンロード</h2><p>CI で実行するので、Linux版を使います。<br>以下からダウンロードできます。<br><a href="https://www.jetbrains.com/PhpStorm/download/#section=linux">https://www.jetbrains.com/PhpStorm/download/#section=linux</a><p>この記事では、最終的には、Dockerコンテナで動かすので、Dockerが使えれば、WindowsでもMacでも、どの環境にも共通です。<p>Dockerfileからダイレクトにダウンロードするなら、このURLです。<br><a href=https://download-cf.jetbrains.com/webide/PhpStorm-2019.2.1.tar.gz>https://download-cf.jetbrains.com/webide/PhpStorm-2019.2.1.tar.gz</a><h2 id=-2-intellij-cli->(2) IntelliJ の CLI 機能</h2><p>コマンドラインから実行できる機能は、公式マニュアルにありました。<br>CI で使えそうな機能は、この2つです。<ul><li>コードインスペクションを起動する<br><a href=https://pleiades.io/help/idea/command-line-code-inspector.html>https://pleiades.io/help/idea/command-line-code-inspector.html</a><li>ファイルをフォーマットする<br><a href=https://pleiades.io/help/idea/command-line-formatter.html>https://pleiades.io/help/idea/command-line-formatter.html</a></ul><p>ファイルのフォーマットも、自動化すると、楽ができることがあるかもしれないので、また別の機会に試してみるとして、コードインスペクションについて、詳しく見ていきます。<p>tar.gz を解凍してみると、 bin ディレクトリの下に、コマンドがありました。<pre><code>PhpStorm-192.6262.66
+├─bin
+│      format.sh
+│      inspect.sh
+</code></pre><h2 id=-3->(3) ライセンス</h2><p>ライセンスの登録は、GUIがないとできません。<br>私の場合は、Windows版でライセンスの登録をして、作成されたライセンスファイルを Linux版でも使っています。<br>同時に起動していなければ、複数マシンにインストールしても問題ないようです。（ライセンス違反ではない）<p>ライセンスファイルは、このあたりに作成されます。（PhpStormのバージョンによって変わってそうです）<pre><code>%USERPROFILE%\.PhpStorm2019.2\config\PhpStorm.key
+</code></pre><h2 id=-4-docker->(4) Dockerコンテナ化</h2><p>PhpStorm を Docker と docker-compose で動かします。 dockerイメージも作りますが、 openjdk のイメージ に Linux 版の PhpStorm をダウンロードして、 /opt/PhpStorm/ にインストールしただけのシンプルなもので、必要な設定ファイルなどは、docker-compose.yml の volumes で置き換える感じにします。<p>PHPのプロジェクトのルート直下に、こんな構成で作成します。<pre><code>$PROJECT_ROOT
+│  .env
+│  docker-compose.yml 
+├─phpstorm
+│      Dockerfile
+│      idea.properties
+│      phpstorm.key           # ライセンスファイルをコピーしておく
+</code></pre><h3 id=-env>./.env</h3><p>docker-compose用のenvです。 Laravelのように、フレームワークが、.envを使っている場合は、それに含めてしまってもよいと思います。あるいは、docker-compose.ymlの中に直接書いても問題ありません。<pre><code class=lang-bash># プロジェクトのルート
+PROJECT_PATH=/app
+# インスペクション結果の出力先
+INSPECTION_OUTPUT_PATH=/app/inspection-output
+# .ideaの中にあるプロファイルのパス
+INSPECTION_PROFILE_PATH=/app/.idea/inspectionProfiles/Project_Default.xml
+</code></pre><p>※ここのパスは、コンテナ内のパス<h3 id=-docker-compose-yml>./docker-compose.yml</h3><pre><code class=lang-yml>version: &#39;2&#39;
+services:
+  # phpstormでinspectionをcliで実行する
+  # @see https://www.christianscheb.de/archives/808
+  # /opt/PhpStorm に phpstorm をインストールして
+  # /opt/PhpStorm/profile に実行時に作成されるデータが置かれるように
+  # idea.properties で設定する。
+  # /opt/PhpStorm/profile は data コンテナで保持し、再利用できるようにしておく。
+  # ただし、ライセンスキー（phpstorm.key）置き場は、dataコンテナでマウントしたパス上にあるので、
+  # 再マウントして置き換える。（profile_data と ./phpstorm.key の定義順が重要）
+  inspect:
+    image: phpstorm
+    build: ./phpstorm
+    volumes:
+      # dataコンテナ（永続化が必要なデータ）
+      ## profileのディレクトリはdataコンテナで保持
+      - profile_data:/opt/PhpStorm/profile
+      ## .javaディレクトリもdataコンテナで保持
+      ## phpstormが使ってるようで保持してないと毎回警告が出てしまうので。
+      - java_data:/root/.java
+
+      # プロジェクトroot -&gt; /app
+      - .:/app
+      # phpstormの構成をデフォルトから設定変更する
+      - ./phpstorm/idea.properties:/opt/PhpStorm/bin/idea.properties
+      # phpstormのライセンスキー
+      - ./phpstorm/phpstorm.key:/opt/PhpStorm/profile/config/phpstorm.key
+    working_dir: /app
+    command: inspact.sh ${PROJECT_PATH} ${INSPECTION_PROFILE_PATH} ${INSPECTION_OUTPUT_PATH} -v2
+
+volumes:
+  profile_data:
+    driver: local
+  java_data:
+    driver: local
+</code></pre><h3 id=-phpstorm-dockerfile>./phpstorm/Dockerfile</h3><pre><code class=lang-docker>FROM openjdk:11
+
+RUN curl -O -L https://download-cf.jetbrains.com/webide/PhpStorm-2019.2.1.tar.gz
+RUN tar xvfz PhpStorm-2019.2.1.tar.gz
+RUN mkdir -p /opt/PhpStorm
+RUN mv PhpStorm-*/* /opt/PhpStorm/
+RUN rm -rf PhpStorm-*
+
+ENV PATH $PATH:/opt/PhpStorm/bin
+
+CMD [&quot;/opt/PhpStorm/bin/inspect.sh&quot;]
+</code></pre><h3 id=-phpstorm-idea-properties>./phpstorm/idea.properties</h3><pre><code>idea.config.path=${idea.home.path}/profile/config
+idea.system.path=${idea.home.path}/profile/system
+idea.plugins.path=${idea.home.path}/profile/plugins
+idea.log.path=${idea.home.path}/profile/log
+
+idea.analyze.scope=MyScope              # scope の説明は後述します
+</code></pre><h2 id=-5-scope->(5) scope を作成する</h2><p>プロジェクト全体をインスペクションの範囲にするなら特別な設定は必要ないのだけど、 フレームワークが違えばディレクトリ構成も違うし、私が参加したプロジェクトでは、インスペクションを導入する前に作成された古いコードが混在していて、そこは除外したいものになっていました。<p>ほとんどの場合で、インスペクションする範囲を設定することになると思いますが、それを可能にするのが、スコープという機能です。<br>スコープは、PhpStormのGUI上で設定します。（→<a href=https://pleiades.io/help/phpstorm/settings-scopes.html>公式マニュアルのページ</a>）<p>設定した内容を、スコープ名を例えば MyScope として保存すると、以下にXMLが作成されます。<p><code>.idea/scopes/MyScope.xml</code><p>CIで使うためには <code>.idea</code> ディレクト配下のこのファイルも git にコミットしておく必要があります。<h3 id=cli->CLIからの実行で、スコープを指定する方法</h3><p>idea.properties に idea.analyze.scope という項目があります。ここに指定したいスコープ名を設定します。<p>※以下の記事を参考にしました。<br><a href=https://stackoverflow.com/questions/37419162/how-to-run-custom-intellij-inspections-from-terminal>https://stackoverflow.com/questions/37419162/how-to-run-custom-intellij-inspections-from-terminal</a><h2 id=-6->(6) インスペクションを実行する</h2><pre><code class=lang-bash>docker-compose run --rm inspect
+</code></pre><h2 id=-7->(7) 結果解析</h2><p>インスペクションの結果は、 <code>.env</code> 内で指定していますが、 <code>~/inspection-output</code> にXMLっぽいファイルで、出力されます。<p>例) PhpDeprecationInspection.xml<pre><code class=lang-xml>&lt;problem&gt;
+  &lt;file&gt;file://$PROJECT_DIR$/controllers/HelloController.php&lt;/file&gt;
+  &lt;line&gt;113&lt;/line&gt;
+  &lt;module&gt;learningware&lt;/module&gt;
+  &lt;entry_point TYPE=&quot;file&quot; FQNAME=&quot;file://$PROJECT_DIR$/controllers/HelloController.php&quot; /&gt;
+  &lt;problem_class severity=&quot;WEAK WARNING&quot; attribute_key=&quot;DEPRECATED_ATTRIBUTES&quot;&gt;Deprecated&lt;/problem_class&gt;
+  &lt;description&gt;Class User is deprecated&lt;/description&gt;
+&lt;/problem&gt;
+&lt;/problems&gt;
+</code></pre><p>一見、XMLのように見えるんですが、先頭に <code>&lt;problems&gt;</code> が無いので、XMLとしては parse エラーになります。なぜ、こんな形式でファイルを作成しているのかは、ちょっとわからないのですが、仮に、XMLとして正しい形式で出力されていても、このままでは、見づらいし、 CI で結果解析するのは、ひと手間必要です。<h3 id=->結果解析用のツール</h3><p>ということで、このXMLっぽいファイルを解析して、コンソールに出力するツールを使います。<br><a href=https://github.com/altus5/idea-inspection-support>https://github.com/altus5/idea-inspection-support</a><p>準備（初回1回だけ）<pre><code>npm init
+npm install altus5/idea-inspection-support --save-dev
+</code></pre><p>ここで作成された package.json は CI で使うためにコミットしておきます。<p>解析実行します。<pre><code>INSPECTION_OUTPUT_PATH=~/inspection-output
+
+npx idea-inspection-support report $INSPECTION_OUTPUT_PATH
+</code></pre><p>インスペクションは実行する前に、結果出力ディレクトリの中を削除してから実行してください。エラーじゃないときに、XMLが出力されないため、エラーがあったときのXMLが残ったままになるので、解消したはずのエラーを検出し続けてしまいます。<p>また、解析するエラーレベルは、固定で実装されています。小さいコードなので、Forkしたり、コピーして自分用に改良して、ご利用ください。<p>ちなみに、このツールには、ほかにも、スコープを自動生成する処理などもあります。 jsonファイルでインスペクション対象のファイルパターンを書いて、それからスコープを作成する処理なんですが、 PhpStorm を普段づかいしていないチームの場合、json書いてスコープ作成・・・の方が楽かもしれません。<a href=https://github.com/altus5/idea-inspection-support>ツールのgithub</a>も合わせて読んでみてください。<h2 id=->まとめ</h2><p>みなさんのプロジェクトでも、品質を保つための工夫の1つとして、 CI 環境で PhpStorm のインスペクションを実行してみると、良いことがあるかもしれません。<br>ご参考までに。</div></div><div id=blog-menu><span><strong>最近の記事</strong></span><ul><li class=recent><a href=/blog/wsl2/docker/2021/03/30/wsl2-docker/ >Docker Desktop WSL 2 バックエンドの使い始め</a><li class=recent><a href=/blog/chatops/2020/11/02/chatops/ >ChatOpsのススメ</a><li class=recent><a href=/blog/etl/2020/09/07/aws-errorlog-monitoring/ >AWSのエラーログ監視の設定</a><li class=recent><a href=/blog/etl/2020/06/15/pyspark/ >PySparkの分散される処理単位であるクロージャと共有変数の仕組み</a><li class=recent><a href=/blog/etl/2020/05/17/aws-glue-development/ >私たちの AWS Glue を使った開発のやり方</a></ul><span><strong>タグ</strong></span><ul><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%8A%80%E8%A1%93%E7%B7%8F%E8%A6%A7/ >プログラミング技術総覧 (16)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Actor%E3%83%A2%E3%83%87%E3%83%AB/ >Actorモデル (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >リアクティブプログラミング (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/ >機械学習 (6)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88/ >静的サイト (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/ >環境構築 (5)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Docker/ >Docker (6)</a><li class="tag-color-label tag__7"><a href=/blog/tag/AngularJS/ >AngularJS (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/React/ >React (2)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%96/ >アルタスファイブ (5)</a><li class="tag-color-label tag__10"><a href=/blog/tag/Vagrant/ >Vagrant (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ >プログラミング (2)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Laravel/ >Laravel (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/OAuth/ >OAuth (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ >アルゴリズム (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/DB/ >DB (2)</a><li class="tag-color-label tag__4"><a href="/blog/tag/Let's%20Encrypt/">Let&#39;s Encrypt (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Chainer/ >Chainer (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%9E%E3%83%AB%E3%82%B3%E3%83%95%E9%80%A3%E9%8E%96/ >マルコフ連鎖 (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/Trie/ >Trie (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/LOUDS/ >LOUDS (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%87%A6%E7%90%86/ >テキスト処理 (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%90/ >形態素解析 (2)</a><li class="tag-color-label tag__11"><a href=/blog/tag/Web%20Performer/ >Web Performer (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Spring%20Boot/ >Spring Boot (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/Spring%20Framework/ >Spring Framework (2)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E6%9B%B8%E8%A9%95/ >書評 (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E7%B5%84%E7%B9%94%E5%BF%83%E7%90%86%E5%AD%A6/ >組織心理学 (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E3%82%B2%E3%83%BC%E3%83%A0%E7%90%86%E8%AB%96/ >ゲーム理論 (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Python/ >Python (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Double%20array/ >Double array (1)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E6%9C%80%E9%81%A9%E5%8C%96/ >最適化 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA/ >システム開発 (6)</a><li class="tag-color-label tag__9"><a href=/blog/tag/TERASOLUNA/ >TERASOLUNA (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E7%B5%B1%E8%A8%88%E5%AD%A6/ >統計学 (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/ >データ可視化 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/R/ >R (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E8%B2%A9%E5%A3%B2%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/ >販売管理システム (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E7%94%A8%E8%AA%9E%E9%9B%86/ >用語集 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9C%E3%83%88%E3%83%AB%E3%83%8D%E3%83%83%E3%82%AF/ >ボトルネック (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/Jupyter%20Notebook/ >Jupyter Notebook (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/%E4%BB%95%E4%BA%8B%E5%8A%B9%E7%8E%87%E5%8C%96/ >仕事効率化 (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ >データ構造 (4)</a><li class="tag-color-label tag__7"><a href=/blog/tag/%E5%AE%9F%E8%A3%85/ >実装 (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E9%80%A3%E6%83%B3%E9%85%8D%E5%88%97/ >連想配列 (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/Ruby/ >Ruby (2)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/ >ハッシュテーブル (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%9C%A7%E7%B8%AE/ >テキスト圧縮 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%9C%A7%E7%B8%AE/ >ファイル圧縮 (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/%E5%85%A8%E6%96%87%E6%A4%9C%E7%B4%A2/ >全文検索 (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E4%BB%95%E6%A7%98%E6%9B%B8/ >仕様書 (2)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%80%E3%82%A6%E3%83%B3/ >マークダウン (2)</a><li class="tag-color-label tag__4"><a href=/blog/tag/a5doc/ >a5doc (2)</a><li class="tag-color-label tag__5"><a href=/blog/tag/Angular/ >Angular (2)</a><li class="tag-color-label tag__6"><a href=/blog/tag/%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%86/ >エラー処理 (2)</a><li class="tag-color-label tag__7"><a href=/blog/tag/SPA/ >SPA (2)</a><li class="tag-color-label tag__8"><a href=/blog/tag/Confluence/ >Confluence (1)</a><li class="tag-color-label tag__9"><a href=/blog/tag/%E3%81%8A%E3%82%84%E3%81%A4/ >おやつ (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91/ >オブジェクト指向 (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/CI/ >CI (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/PhpStorm/ >PhpStorm (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/IntelliJ/ >IntelliJ (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%9A%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/ >インスペクション (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/%E6%BC%AB%E7%94%BB/ >漫画 (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/%E6%8E%A1%E7%94%A8/ >採用 (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/AWS/ >AWS (4)</a><li class="tag-color-label tag__6"><a href=/blog/tag/Glue/ >Glue (2)</a><li class="tag-color-label tag__7"><a href=/blog/tag/Spark/ >Spark (3)</a><li class="tag-color-label tag__8"><a href=/blog/tag/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AC%E3%82%B9/ >サーバーレス (3)</a><li class="tag-color-label tag__9"><a href=/blog/tag/PySpark/ >PySpark (1)</a><li class="tag-color-label tag__10"><a href=/blog/tag/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3/ >クロージャ (1)</a><li class="tag-color-label tag__11"><a href=/blog/tag/%E3%83%AD%E3%82%B0%E7%9B%A3%E8%A6%96/ >ログ監視 (1)</a><li class="tag-color-label tag__0"><a href=/blog/tag/Chatbot/ >Chatbot (1)</a><li class="tag-color-label tag__1"><a href=/blog/tag/ChatOps/ >ChatOps (1)</a><li class="tag-color-label tag__2"><a href=/blog/tag/Lambda/ >Lambda (1)</a><li class="tag-color-label tag__3"><a href=/blog/tag/Bot%20Builder/ >Bot Builder (1)</a><li class="tag-color-label tag__4"><a href=/blog/tag/Slack/ >Slack (1)</a><li class="tag-color-label tag__5"><a href=/blog/tag/WSL2/ >WSL2 (1)</a><li class="tag-color-label tag__6"><a href=/blog/tag/DevOps/ >DevOps (1)</a></ul></div></div><div class=w_const><div id=fb-root></div><script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=331911723808007";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script><ul class=socialbuttons><li class=twitter><a href=https://twitter.com/share class=twitter-share-button>Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script><li class=facebook><div class=fb-like data-href=https://www.altus5.co.jpundefined data-layout=box_count data-action=like data-size=small data-show-faces=false data-share=false></div><li class=hatena><a href=http://b.hatena.ne.jp/entry/ class=hatena-bookmark-button data-hatena-bookmark-layout=vertical-normal data-hatena-bookmark-lang=ja data-hatena-bookmark-title=IntelliJ%u7CFBIDE%u306E%u30A4%u30F3%u30B9%u30DA%u30AF%u30B7%u30E7%u30F3%u3092CLI%u3067%u5B9F%u884C%u3059%u308B title=このエントリーをはてなブックマークに追加><img src=https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png alt=このエントリーをはてなブックマークに追加 width=20 height=20 style="border: none"></a><script src=https://b.st-hatena.com/js/bookmark_button.js charset=utf-8 async></script><li class=pocket><a data-pocket-label=pocket data-pocket-count=vertical class=pocket-btn data-lang=ja></a><script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script><li class=feedly><a href=//feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.altus5.co.jp%2Ffeed.xml target=blank><img id=feedlyFollow src=http://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png alt="follow us in feedly" width=66 height=20></a></ul></div></article><article id=scout class=article><h1 class="scout_title w_const">＼(＾▽＾*) 私たちと一緒に働いてみませんか？ (*＾▽＾)／</h1><div class="article__conts w_const"><section class="content01 content"><p>少しでも興味をお持ちいただけたら、お気軽に、お問い合わせください。<p><a href=/contact/entry/ >採用応募受付へ</a><p>(採用応募じゃなく、ただ、会ってみたいという方も、大歓迎です。)</section></div></article></div><footer id=_footer><nav class=w_const><div class="content01 cf"><div class=profile><h1 class=foot_logo><a href=/ ><img src=/images/logo_footer.png alt=Altus-Five（アルタスファイブ）></a></h1><div class=address><p class=paragraph>〒160-0022<p class=paragraph>東京都新宿区新宿2-1-9AIRA新宿御苑ビル7F<p class=paragraph><a href=tel:03-6904-5573>TEL：03-6904-5573</a></div></div><ul class="links links01"><li class=link><a href=/ >TOP</a><li class=link><a href=/#introduction>アルタスファイブとは</a><li class=link><a href=/#feature>強み</a><li class=link><a href=/#service>サービス</a><li class=link><a href=/#performance>実績</a><li class=link><a href=/#example>開発事例</a><li class=link><a href=/blog/ >ブログ</a></ul><ul class="links links02"><li class=link><a href=/recruit/ >採用情報</a><li class=link><a href=/company/ >会社概要</a><li class=link><a href=/privacy/ >個人情報保護方針</a><li class=link><a href=/contact/ >お問い合わせ</a></ul><ul class=marks><li class=mark><img src=/images/p_mark.png alt=""></ul></div><div id=copyright>© 2016 Altus-Five Co.,LTD. ALL RIGHTS RESERVED.</div></nav></footer><script src="/scripts/vendor.js?rev=552120558cefaab8fa7ce89568b11848"></script><script>$(function() {
+      var fout = false;
+      var orgFontFamily;
+      if (fout) {
+        var orgFontFamily = $('body').css('font-family');
+        $('body').css({'font-family': "'Helvetica', 'Arial', 'メイリオ', 'Meiryo', 'MS  PGothic', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif"});
+      }
+      WebFont.load({
+        google: {
+          families: [
+            "PT Sans Narrow:n4,n7"
+          ]
+        },
+        custom: {
+          families: [
+            "Noto Sans Japanese:n4,n7"
+          ]
+        },
+        timeout: 3000,
+        loading: function() {
+          // ロードしているとき allfonts
+        },
+        active: function() {
+          // Web Fontが使用可能になったとき allfonts
+        },
+        inactive: function() {
+          // ブラウザがサポートしていないとき allfonts
+        },
+        fontloading: function(fontFamily, fontDescription) {
+          // fontFamilyをロードしているとき onefont
+        },
+        fontactive: function(fontFamily, fontDescription) {
+          // fontFamilyが使用可能になったとき onefont
+          if (fout) {
+            if ('Noto Sans Japanese' === fontFamily) {
+              $('body').css({'font-family': orgFontFamily});
+            }
+          }
+        },
+        fontinactive: function(fontFamily, fontDescription) {
+          // fontFamilyをブラウザがサポートしていないとき onefont
+        }
+      });
+    });</script><script src="/scripts/common.js?rev=88ed76e81255e2c8404edb27a6c51044"></script><script src="/scripts/jquery.tile.min.js?rev=24209686ddcda6d9849f65fb20bede19"></script><script type=text/x-mathjax-config>MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+        processEscapes: true
+      }
+    });</script><script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
